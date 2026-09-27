@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-background":"#1c1b22","on-primary-container":"#e0d2ff","inverse-surface":"#312f37","on-secondary-fixed":"#002116","on-secondary-container":"#416b59","secondary":"#3c6755","primary-fixed":"#e9ddff","on-primary-fixed":"#22005d","surface-container-high":"#ebe6f0","on-surface-variant":"#494551","inverse-on-surface":"#f3eff9","on-tertiary-fixed":"#251a00","on-tertiary-fixed-variant":"#5a4400","background":"#fcf8ff","on-surface":"#1c1b22","inverse-primary":"#cfbcff","on-error-container":"#93000a","surface-tint":"#6750a4","on-primary":"#ffffff","secondary-fixed-dim":"#a3d0bb","on-secondary-fixed-variant":"#244e3e","surface-dim":"#dcd8e2","surface-container":"#f0ecf6","surface-variant":"#e5e1ea","secondary-container":"#bcead4","tertiary":"#5a4300","outline":"#7a7582","primary-container":"#6750a4","on-tertiary":"#ffffff","on-primary-fixed-variant":"#4f378a","on-tertiary-container":"#ffd366","tertiary-container":"#765a00","primary-fixed-dim":"#cfbcff","outline-variant":"#cbc4d2","on-error":"#ffffff","tertiary-fixed-dim":"#ecc156","error":"#ba1a1a","surface-bright":"#fcf8ff","surface-container-highest":"#e5e1ea","on-secondary":"#ffffff","primary":"#4f378a","secondary-fixed":"#bfedd7","error-container":"#ffdad6","surface-container-lowest":"#ffffff","surface":"#fcf8ff","tertiary-fixed":"#ffdf97","surface-container-low":"#f6f2fc"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"0.875rem","margin":"2.5rem","margin-mobile":"1.25rem","space-lg":"1.5rem","gutter":"1.5rem","gutter-mobile":"1rem","space-sm":"0.5rem","space-xs":"0.25rem","space-xl":"2.25rem"},"fontFamily":{"body-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"display-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"]},"fontSize":{"body-sm":["0.8125rem",{"lineHeight":"1.25rem","letterSpacing":"0.005em","fontWeight":"400"}],"headline-md":["1.375rem",{"lineHeight":"1.875rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"600"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"600"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.03em","fontWeight":"600"}],"headline-sm":["1.125rem",{"lineHeight":"1.625rem","letterSpacing":"-0.01em","fontWeight":"500"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"400"}],"headline-xl":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.025em","fontWeight":"600"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","letterSpacing":"0em","fontWeight":"400"}],"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_8px_32px_-8px_rgba(36,35,42,0.04)] z-50 flex flex-col justify-between p-space-md"><div class="flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm px-space-xs py-space-xs"><img alt="Brand logo. - Primary color: #6750a4
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X-8v9j35inoBzftiTjhME3YiJxEEkSkinCVBEbFcdI0vsRZ9L8xMUO85QPPyV1MGNTLrL1EGOvLqLmpMHntQg5Vf6OEFuGjz1RikLzyjTHbcQljD847_QYzavdkG9aJlvk0liOJYBVSCdJCEzObMIkt-iKRMETlKcKRzjogCho18BELktU3-q0cFlCwIVauY_k-a3w1bLUZ6Tj6NQ0KBUm3NBHWemZ4astQgQKjHnWRRdYF3puHQH3DA"/><div class="flex flex-col"><span class="font-label-lg text-label-lg tracking-wider text-on-surface uppercase font-bold">FENESTRA</span><span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Quiet Digital Workspace</span></div></div><div class="h-px w-full bg-outline-variant/30 my-space-xs"></div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0_2px_8px_-2px_rgba(103,80,164,0.2)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span>Home</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">wb_sunny</span><span>Today</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="tasks" href="#"><span class="material-symbols-outlined text-[20px]">check_circle</span><span>Tasks</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="workspace" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Workspace (CampusFlow)</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="calendar" href="#"><span class="material-symbols-outlined text-[20px]">calendar_today</span><span>Calendar</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="insights" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span>Insights</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 font-body-md text-body-md" data-path="capture" href="#"><span class="material-symbols-outlined text-[20px]">inbox</span><span>Capture / Inbox</span></a></nav><div class="h-px w-full bg-outline-variant/30 my-space-xs"></div><div class="px-1"><a class="flex items-center justify-between px-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container-high transition-all duration-150 font-body-md text-body-md group" data-path="focus-mode-sanctuary" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-primary">spa</span><span class="font-medium">Focus Sanctuary</span></div><span class="flex h-2.5 w-2.5 rounded-full bg-tertiary-fixed shadow-[0_0_8px_rgba(244,201,93,0.8)] animate-pulse"></span></a></div></div><div class="flex flex-col gap-space-sm pt-space-sm"><div class="h-px w-full bg-outline-variant/30"></div><div class="flex items-center justify-between px-space-sm py-space-xs bg-surface-container-low rounded-xl"><div class="flex items-center gap-space-xs"><span class="flex h-2 w-2 rounded-full bg-tertiary-fixed shadow-[0_0_6px_rgba(244,201,93,0.7)]"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Focus streak</span></div><span class="font-label-sm text-label-sm font-semibold text-on-surface">4 days</span></div><div class="flex items-center justify-between px-space-xs py-space-xs rounded-xl hover:bg-surface-container-low transition-colors"><div class="flex items-center gap-space-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W21C8qzBMiv-ViIHnP3eBhXa5mUhDH6TeV2XCiFMYFd4M_wXYFJmfPdD01Dxnu6PkiluN0L2v0yk3xSF59NjosRB7doKq6l2HtixP-BOkztBdNMfTxQgwLZCoWjGhSBLjdaRrbnYHVJ30OX_v83rQKBd-ZiZocAsj1qLX_M5Jy-__HNybXqn2PtpdLmB3FZSDuOGOOYpyDe_yL_wAhF7O_8y2juM7qYrpZ1Xxu6X4D9qa0XUqJpPexQQ"/><div class="flex flex-col"><span class="font-label-lg text-label-lg font-medium text-on-surface leading-tight">Aanya S.</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Personal Space</span></div></div><a class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[18px]">settings</span></a></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(36,35,42,0.02)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md w-96"><div class="flex items-center gap-space-sm w-full bg-surface-container px-space-md py-space-xs rounded-xl shadow-none"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">search</span><input class="bg-transparent border-0 outline-none text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm w-full" placeholder="Search tasks, notes, desks..." type="text"/><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-medium tracking-wide">⌘K</span></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-space-xs px-space-md py-space-xs bg-primary-container text-on-primary font-label-lg text-label-lg rounded-full shadow-[0_2px_8px_rgba(103,80,164,0.18)] hover:bg-primary transition-all duration-150"><span class="material-symbols-outlined text-[18px]">add</span><span>New Item</span></button><button class="relative flex items-center justify-center w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary-fixed shadow-[0_0_6px_rgba(244,201,93,0.8)]"></span></button><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W21C8qzBMiv-ViIHnP3eBhXa5mUhDH6TeV2XCiFMYFd4M_wXYFJmfPdD01Dxnu6PkiluN0L2v0yk3xSF59NjosRB7doKq6l2HtixP-BOkztBdNMfTxQgwLZCoWjGhSBLjdaRrbnYHVJ30OX_v83rQKBd-ZiZocAsj1qLX_M5Jy-__HNybXqn2PtpdLmB3FZSDuOGOOYpyDe_yL_wAhF7O_8y2juM7qYrpZ1Xxu6X4D9qa0XUqJpPexQQ"/></div></div></header><main class="relative pt-16 w-full min-h-screen bg-background"><div class="flex flex-col w-full">
+<div class="px-margin py-space-xl flex flex-col gap-space-xl max-w-[1560px] mx-auto w-full">
+<!-- Top Desk Sanctuary Bar -->
+<section class="flex flex-col gap-space-md">
+<!-- Breadcrumb & Ambient Status Cues -->
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md tracking-wider uppercase">
+<span>Desks</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-lowest px-space-md py-1.5 rounded-full shadow-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">CampusFlow</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(Design &amp; Prototyping)</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant cursor-pointer hover:text-on-surface transition-colors">unfold_more</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span>Active Desk</span>
+</div>
+</div>
+<!-- Ambient Mood Ribbon -->
+<div class="flex items-center gap-space-sm px-space-md py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">nest_eco_leaf</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Desk Mood:</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Tranquil Washi</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Rain on Paper 40%</span>
+<div class="w-12 h-1.5 bg-surface-container rounded-full overflow-hidden flex">
+<div class="w-[40%] bg-primary-container rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Action & View Controls Filter Ribbon -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-space-xs">
+<!-- View Mode Segmented Controls -->
+<div class="flex items-center p-1 bg-surface-container-high rounded-full shadow-inner">
+<button class="flex items-center gap-1.5 px-space-md py-1 rounded-full bg-surface-container-lowest text-on-surface shadow-sm font-label-md text-label-md font-semibold transition-all">
+<span class="material-symbols-outlined text-[16px]">view_kanban</span>
+<span>Board</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[16px]">format_list_bulleted</span>
+<span>List</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[16px]">calendar_view_week</span>
+<span>Timeline</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[16px]">sticky_note_2</span>
+<span>Notes</span>
+</button>
+</div>
+<!-- Filter Pills & Quick Actions -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-1 bg-surface-container-low px-space-sm py-1 rounded-full">
+<button class="px-space-sm py-0.5 rounded-full bg-surface-container-lowest font-label-sm text-label-sm text-on-surface font-semibold shadow-sm">All 14</button>
+<button class="px-space-sm py-0.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors">High Priority</button>
+<button class="px-space-sm py-0.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors">Due Today</button>
+<button class="px-space-sm py-0.5 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors">In Review</button>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-lowest px-space-md py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">filter_list</span>
+<input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm outline-none w-28 focus:w-40 transition-all" placeholder="Filter tasks..." type="text"/>
+</div>
+<button class="flex items-center gap-space-xs px-space-lg py-2 bg-primary-container text-on-primary font-label-md text-label-md rounded-full shadow-[0_4px_16px_rgba(103,80,164,0.22)] hover:bg-primary transition-all duration-150">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Task</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Tactical Workspace & Organizer Stage -->
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Left & Center: Tactical Task Flow (3 Paper Columns) -->
+<div class="col-span-12 xl:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-gutter items-start">
+<!-- Column 1: Queue / Attention Needed -->
+<div class="flex flex-col gap-space-md bg-surface-container-low/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed shadow-[0_0_8px_rgba(255,223,151,0.9)]"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Queue / Attention</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-medium">3</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Card 1 -->
+<div class="group relative bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-4px_rgba(36,35,42,0.04)] hover:shadow-[0_8px_24px_-4px_rgba(103,80,164,0.08)] transition-all duration-200 cursor-pointer">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">#tokens</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/60 text-on-tertiary-fixed-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">bolt</span>
+                  Priority
+                </span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold text-on-surface mt-space-sm line-clamp-2">
+                Refine color contrast tokens for accessibility
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+                Validate WCAG AAA compliance across calm parchment surfaces &amp; frosted glass panels.
+              </p>
+<!-- Progress & Metadata bar -->
+<div class="mt-space-md pt-space-xs flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Subtasks</span>
+<span class="font-medium text-on-surface">3 / 4 completed</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-3/4"></div>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<div class="flex items-center -space-x-1.5">
+<img class="w-6 h-6 rounded-full object-cover shadow-sm" data-alt="Warm portrait of Japanese designer Aiko with subtle studio lighting, minimal styling, warm ivory background and plum accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDIQufaxv_5jzzTC8uTb5-JI2OJpOcjECCrrizsF9qsQipIuQnF5bCcw_rhJ88SW8l_y_7Z-qsxKuuoz9ETmkML39C-Z5lQiDW9LluWOACFMhhpdof6xMzLsiD6oLH-Z9OseDSLZVZrlSVB-QSxr1uPm5EsK5hN7gGuw9oqZrY51IsSNi45fPjKZcUSRxgJBh_ujKtzdjpbPu5LzvwzEPazyGSZqobqnZUF8eq8xefCyx181Sp1gs"/>
+<img class="w-6 h-6 rounded-full object-cover shadow-sm" data-alt="Portrait of student researcher Kenji smiling gently in quiet library setting, soft daylight, warm tones matching the brand palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVCubg8nsj0smk0vECn5nAizBPZQNeiumUnD1w_K2XUjpAfDYoXPR16yk27HT3AhkKw9CP4T3Nm8gIp2hd0UQRYCg8NVeYF1Bc14PKfC0PDIxVBE_XQW0LhnLr5-Q8jyilmlLQn_QkqyAoLyvOiVuWRea7mE-dzc4WjajBAcXPbHKW6FkCi8eQIQUunjS66NgFtYuWjAQccpys0jrFndfsCcUQ8uYpqR-j0TEedUQzFH2-8JJWNYk"/>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] text-tertiary">schedule</span>
+<span>Today 5:30 PM</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-4px_rgba(36,35,42,0.04)] hover:shadow-[0_8px_24px_-4px_rgba(103,80,164,0.08)] transition-all duration-200 cursor-pointer">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">#prototype</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/60 text-on-tertiary-fixed-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px]">bolt</span>
+                  Priority
+                </span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold text-on-surface mt-space-sm">
+                Finalize mobile navigation interactions
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Tune subtle spring easing for floating dock sheet transition.
+              </p>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-on-surface-variant">attach_file</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 assets</span>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>3:00 PM</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-4px_rgba(36,35,42,0.04)] hover:shadow-[0_8px_24px_-4px_rgba(103,80,164,0.08)] transition-all duration-200 cursor-pointer">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">#database</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">Scheduled</span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold text-on-surface mt-space-sm">
+                CampusFlow schema review
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Sync relations for Desk &gt; Task &gt; FocusSession entities.
+              </p>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">tag</span>
+<span>v2-release</span>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">event</span>
+<span>Tomorrow</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: In Deep Flow (Active Sanctuary Workspace) -->
+<div class="flex flex-col gap-space-md bg-surface-container-low/60 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_10px_rgba(103,80,164,0.7)] animate-pulse"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">In Deep Flow</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-container text-on-primary font-medium">2</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Active Illuminated Focus Card -->
+<div class="relative bg-surface-container-lowest rounded-xl p-space-md shadow-[0_8px_32px_-6px_rgba(103,80,164,0.18)] bg-gradient-to-br from-surface-container-lowest via-surface-container-lowest to-surface-container-low">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px] animate-spin">progress_activity</span>
+<span>Now Active</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed/40 text-on-tertiary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px]">timer</span>
+<span class="font-semibold">38m elapsed</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mt-space-sm leading-snug">
+                Complete project prototype &amp; motion QA
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Refining tactile deceleration curves on task cards and drawer sheets.
+              </p>
+<!-- Interactive Sub-checklist Preview -->
+<div class="mt-space-md bg-surface-container-low/70 rounded-xl p-space-sm flex flex-col gap-2">
+<label class="flex items-center gap-space-sm cursor-pointer group">
+<span class="w-4 h-4 rounded bg-primary-container flex items-center justify-center text-on-primary shadow-xs">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface line-through decoration-on-surface-variant/40">Framer Motion transition tuning</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer group">
+<span class="w-4 h-4 rounded bg-surface-container-lowest flex items-center justify-center shadow-xs"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Test haptic tap on iOS Safari</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer group">
+<span class="w-4 h-4 rounded bg-surface-container-lowest flex items-center justify-center shadow-xs"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Screen reader label verification</span>
+</label>
+</div>
+<!-- Sanctuary Quick Hop Action -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">headphones</span>
+<span>Rain Ambient</span>
+</div>
+<a class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold shadow-[0_2px_12px_rgba(103,80,164,0.3)] hover:bg-primary transition-all" href="#">
+<span>Enter Sanctuary</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Flow Item 2 -->
+<div class="group relative bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_20px_-4px_rgba(36,35,42,0.04)] hover:shadow-[0_8px_24px_-4px_rgba(103,80,164,0.08)] transition-all duration-200 cursor-pointer">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">#editorial</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm">85% done</span>
+</div>
+<h3 class="font-body-md text-body-md font-semibold text-on-surface mt-space-sm">
+                Design system typography scale audit
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Harmonizing Plus Jakarta Sans line-height pairings with Japanese grid cadence.
+              </p>
+<!-- Subtle Progress Track -->
+<div class="mt-space-md flex flex-col gap-1">
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full w-[85%]"></div>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">checklist</span>
+<span>11 of 13 specs</span>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>Self</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: Archived & Serene (Completed) -->
+<div class="flex flex-col gap-space-md bg-surface-container-low/40 rounded-xl p-space-md shadow-xs">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Archived &amp; Serene</h2>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-medium">2</span>
+</div>
+<div class="flex flex-col gap-space-md opacity-85 hover:opacity-100 transition-opacity">
+<!-- Completed Task 1 -->
+<div class="bg-surface-container-lowest/80 rounded-xl p-space-md shadow-xs flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px]">check</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Completed 11:20 AM</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-on-surface cursor-pointer">more_horiz</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant line-through font-medium mt-1">
+                Export SVG brand assets for Fenestra
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70">
+                Uploaded clean vectors to shared CampusFlow asset directory.
+              </p>
+</div>
+<!-- Completed Task 2 -->
+<div class="bg-surface-container-lowest/80 rounded-xl p-space-md shadow-xs flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px]">check</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Completed 9:45 AM</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant hover:text-on-surface cursor-pointer">more_horiz</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant line-through font-medium mt-1">
+                Literature review &amp; design manifesto reading
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70">
+                Notes transcribed into 'Quiet Digital Workspaces' chapter outline.
+              </p>
+</div>
+<!-- Zen Day Progress Dial Card -->
+<div class="mt-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-xs flex items-center gap-space-md">
+<div class="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<circle class="text-surface-container" cx="18" cy="18" fill="none" r="15" stroke="currentColor" stroke-width="3"></circle>
+<circle class="text-secondary" cx="18" cy="18" fill="none" r="15" stroke="currentColor" stroke-dasharray="94.2" stroke-dashoffset="28.2" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+<span class="absolute font-label-sm text-label-sm font-bold text-secondary">70%</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Daily Flow Target</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">5 of 7 intentions closed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Desk Organizer Rail (Stationery Shelf & Atmosphere Deck) -->
+<aside class="col-span-12 xl:col-span-3 flex flex-col gap-space-lg">
+<!-- Ambient Soundscape Controller Card -->
+<div class="relative overflow-hidden bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_8px_32px_-8px_rgba(36,35,42,0.06)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-tertiary">
+<span class="material-symbols-outlined text-[18px]">graphic_eq</span>
+<span class="font-label-md text-label-md font-semibold tracking-wide uppercase">Soundscape</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Live Feed
+            </span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Kyoto Cedar Rain</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">&amp; Gentle Cast-Iron Tea Kettle</span>
+</div>
+<!-- Tactile Waveform Visualization (SVG) -->
+<div class="w-full h-12 flex items-center justify-between gap-1 py-1 px-space-xs bg-surface-container-low rounded-xl">
+<div class="w-1 bg-primary/40 rounded-full h-3 animate-pulse"></div>
+<div class="w-1 bg-primary/60 rounded-full h-6 animate-pulse" style="animation-delay: 0.1s"></div>
+<div class="w-1 bg-primary rounded-full h-8 animate-pulse" style="animation-delay: 0.2s"></div>
+<div class="w-1 bg-primary/80 rounded-full h-10 animate-pulse" style="animation-delay: 0.3s"></div>
+<div class="w-1 bg-tertiary rounded-full h-6 animate-pulse" style="animation-delay: 0.15s"></div>
+<div class="w-1 bg-primary-container rounded-full h-9 animate-pulse" style="animation-delay: 0.25s"></div>
+<div class="w-1 bg-primary/70 rounded-full h-7 animate-pulse" style="animation-delay: 0.05s"></div>
+<div class="w-1 bg-primary rounded-full h-10 animate-pulse" style="animation-delay: 0.35s"></div>
+<div class="w-1 bg-primary/50 rounded-full h-4 animate-pulse" style="animation-delay: 0.1s"></div>
+<div class="w-1 bg-primary/75 rounded-full h-8 animate-pulse" style="animation-delay: 0.2s"></div>
+<div class="w-1 bg-secondary rounded-full h-5 animate-pulse" style="animation-delay: 0.3s"></div>
+<div class="w-1 bg-primary/60 rounded-full h-7 animate-pulse" style="animation-delay: 0.15s"></div>
+<div class="w-1 bg-primary rounded-full h-9 animate-pulse" style="animation-delay: 0.4s"></div>
+<div class="w-1 bg-primary/40 rounded-full h-3 animate-pulse" style="animation-delay: 0.2s"></div>
+</div>
+<!-- Volume & Resonance Knobs -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">volume_up</span>
+                Binaural Presence
+              </span>
+<span class="font-medium text-on-surface">40%</span>
+</div>
+<div class="relative w-full h-2 bg-surface-container rounded-full overflow-hidden flex items-center">
+<div class="h-full bg-primary-container rounded-full w-[40%]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed shadow-sm -ml-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface">
+<span class="material-symbols-outlined text-[15px]">sensors</span>
+<span>Acoustic Warmth</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+</button>
+</div>
+</div>
+<!-- Desk Reference Shelf: Pinned Docs & Material Assets -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-[0_8px_32px_-8px_rgba(36,35,42,0.04)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-primary">bookmark</span>
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight">Reference Shelf</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_link</span>
+</button>
+</div>
+<!-- Document Items -->
+<div class="flex flex-col gap-space-sm">
+<a class="group flex items-center justify-between p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-all" href="#">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">CampusFlow Tokens v2.1</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Figma Library</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">arrow_outward</span>
+</a>
+<a class="group flex items-center justify-between p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-all" href="#">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed-variant transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">collections_bookmark</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Kyoto Aesthetics Moodboard</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Curated Inspiration</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-tertiary transition-colors">arrow_outward</span>
+</a>
+<a class="group flex items-center justify-between p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-all" href="#">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">code_blocks</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Prisma Schema v4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">PostgreSQL DB Doc</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-secondary transition-colors">arrow_outward</span>
+</a>
+</div>
+<!-- Quick Desk Visual Attachment Pin -->
+<div class="relative rounded-xl overflow-hidden shadow-xs mt-space-xs">
+<img class="w-full h-28 object-cover hover:scale-105 transition-transform duration-500" data-alt="Minimalist top-down Japanese study desk with ceramic tea cup, textured washi paper sketchbook, smooth brass ruler, and soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMlfZJE-fmdOwNhL5BzwAWVgsyqOSvkOHMExRMDlhqXRo__a5JM7qydlVkG3gOwf-9CZvesNddwW2BBOKl-O0uzYKkSvX2V_h26KDfCFlNjBCiRRzou2AHOh6tsJW8_1PnXhlDLw6twof96cND5KPHeYmJ-6m_jLPVKI1B9JRksIWNBZf_dtLXj0O8SW0GWYUDjBJ_VpFeacaISa5hwguXQ84bHdzz6-BvyZq2Ft6jU1UtvffuwEc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/20 to-transparent flex items-end p-space-sm">
+<span class="font-label-sm text-label-sm text-inverse-on-surface font-medium">CampusFlow physical study bench reference</span>
+</div>
+</div>
+</div>
+<!-- Quiet Pacing Memo Card (Warm Stationery Note) -->
+<div class="relative bg-tertiary-fixed/30 rounded-xl p-space-lg shadow-sm flex flex-col gap-space-sm overflow-hidden">
+<!-- Subtle Paper Stamp Graphic -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+<span class="font-label-md text-label-md font-semibold tracking-wider uppercase">Quiet Pacing</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant font-medium">№ 08</span>
+</div>
+<blockquote class="font-body-md text-body-md text-on-surface italic leading-relaxed pt-space-xs">
+            “Work feels like sitting down at a clean wooden desk with morning tea. Your focus is a garden to be protected.”
+          </blockquote>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Fenestra Mindful Cadence</span>
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div></main></div></body></html>

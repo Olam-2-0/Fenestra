@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FENESTRA — Your Life, Seen Clearly</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#0B1020',
+            'midnight-subtle': '#0E1528',
+            surface: '#111A2E',
+            elevated: '#17223A',
+            'border-fen': '#26324B',
+            'primary-text': '#F6F7FB',
+            'muted-text': '#8E9AB3',
+            'fen-blue': '#7187FF',
+            'fen-violet': '#8C7BFF',
+            'fen-mint': '#A7E8C8',
+            'window-light': '#FFD98A',
+            'fen-urgent': '#FF8585'
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['Newsreader', 'serif'],
+          },
+          boxShadow: {
+            'window-glow': '0 0 50px -10px rgba(113, 135, 255, 0.25), 0 0 80px -15px rgba(255, 217, 138, 0.15)',
+            'amber-subtle': '0 0 35px -5px rgba(255, 217, 138, 0.2)',
+            'card-depth': '0 10px 30px -10px rgba(7, 11, 21, 0.7)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0B1020;
+      color: #F6F7FB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .window-radial-light {
+      background: radial-gradient(circle at 50% 20%, rgba(113, 135, 255, 0.18) 0%, rgba(140, 123, 255, 0.1) 35%, rgba(255, 217, 138, 0.08) 55%, transparent 75%);
+    }
+    .amber-leak-radial {
+      background: radial-gradient(ellipse at top right, rgba(255, 217, 138, 0.16) 0%, rgba(113, 135, 255, 0.05) 50%, transparent 70%);
+    }
+    .custom-border {
+      border: 1px solid #26324B;
+    }
+    .glass-nav {
+      background: rgba(11, 16, 32, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes floatDelayed {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float-slow {
+      animation: floatGentle 6s ease-in-out infinite;
+    }
+    .animate-float-delayed {
+      animation: floatDelayed 7s ease-in-out infinite 1.5s;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="selection:bg-fen-blue/30 selection:text-white">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-border-fen/70 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-elevated custom-border flex items-center justify-center relative overflow-hidden group-hover:border-fen-blue/60 transition-all duration-300">
+          <div class="absolute inset-0 bg-gradient-to-tr from-fen-blue/30 via-transparent to-window-light/20 opacity-70 group-hover:opacity-100 transition-opacity"></div>
+          <!-- Minimal Window/Orbit Glyph -->
+          <svg class="w-5 h-5 text-primary-text relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor"/>
+            <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-opacity="0.5"/>
+            <circle cx="16" cy="8" r="1.5" fill="#FFD98A" stroke="none"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-base font-bold tracking-[0.2em] text-primary-text">FENESTRA</span>
+          <span class="text-[10px] tracking-wider text-muted-text -mt-1 font-medium">STUDENT LIFE CARETAKER</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted-text">
+        <a href="#how-it-works" class="hover:text-primary-text hover:text-white transition-colors">How It Works</a>
+        <a href="#features" class="hover:text-primary-text hover:text-white transition-colors">Features</a>
+        <a href="#why-fenestra" class="hover:text-primary-text hover:text-white transition-colors">Why Fenestra</a>
+        <a href="#focus-mode" class="hover:text-primary-text hover:text-white transition-colors">Focus Mode</a>
+        <a href="#demo" class="hover:text-primary-text hover:text-white transition-colors">Interactive Demo</a>
+      </nav>
+
+      <!-- Desktop CTA Buttons -->
+      <div class="hidden md:flex items-center gap-4">
+        <button onclick="openAuthModal('signin')" class="text-sm font-medium text-primary-text hover:text-fen-blue transition-colors px-3 py-2">
+          Sign In
+        </button>
+        <button onclick="openAuthModal('signup')" class="relative group overflow-hidden rounded-full bg-fen-blue px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 shadow-[0_0_20px_rgba(113,135,255,0.35)] hover:shadow-[0_0_30px_rgba(113,135,255,0.6)] hover:bg-[#6077f5] active:scale-95">
+          <span class="relative z-10 flex items-center gap-1.5">
+            Get Started
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button onclick="toggleMobileMenu()" class="md:hidden text-primary-text p-2 rounded-lg bg-surface custom-border" aria-label="Toggle Menu">
+        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="md:hidden hidden bg-surface/95 backdrop-blur-xl border-b border-border-fen px-6 py-6 space-y-4">
+      <nav class="flex flex-col space-y-3 text-base font-medium text-muted-text">
+        <a href="#how-it-works" onclick="toggleMobileMenu()" class="hover:text-white transition-colors py-1">How It Works</a>
+        <a href="#features" onclick="toggleMobileMenu()" class="hover:text-white transition-colors py-1">Features</a>
+        <a href="#why-fenestra" onclick="toggleMobileMenu()" class="hover:text-white transition-colors py-1">Why Fenestra</a>
+        <a href="#focus-mode" onclick="toggleMobileMenu()" class="hover:text-white transition-colors py-1">Focus Mode</a>
+        <a href="#demo" onclick="toggleMobileMenu()" class="hover:text-white transition-colors py-1">Interactive Demo</a>
+      </nav>
+      <div class="pt-4 border-t border-border-fen flex flex-col gap-3">
+        <button onclick="toggleMobileMenu(); openAuthModal('signin')" class="w-full py-3 rounded-xl bg-elevated custom-border text-center text-sm font-semibold text-primary-text">
+          Sign In
+        </button>
+        <button onclick="toggleMobileMenu(); openAuthModal('signup')" class="w-full py-3 rounded-xl bg-fen-blue text-center text-sm font-semibold text-white shadow-lg shadow-fen-blue/30">
+          Get Started →
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="hero" class="relative pt-36 pb-24 md:pt-44 md:pb-36 overflow-hidden">
+    <!-- Window Light Background Leaks -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[550px] window-radial-light pointer-events-none -z-10"></div>
+    <div class="absolute top-24 right-0 w-[500px] h-[500px] amber-leak-radial pointer-events-none -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      
+      <!-- Center Text Hero -->
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Tiny Window Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-elevated/80 custom-border mb-8 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-window-light animate-pulse"></span>
+          <span class="text-xs font-semibold text-window-light tracking-wide uppercase">A window into your life</span>
+          <span class="text-xs text-border-fen">•</span>
+          <span class="text-xs text-muted-text">Built for overloaded college days</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-primary-text leading-[1.08] mb-6">
+          YOUR LIFE,<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-text via-fen-blue to-window-light">SEEN CLEARLY.</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-muted-text leading-relaxed max-w-2xl mx-auto mb-4">
+          College life doesn’t arrive as a neat checklist. Assignments, screenshots, deadlines, meetings, goals, and sudden changes come from everywhere.
+        </p>
+
+        <p class="text-base sm:text-lg font-medium text-primary-text max-w-2xl mx-auto mb-10">
+          FENESTRA brings them together, understands what matters, and turns chaotic days into an adaptive plan.
+        </p>
+
+        <!-- CTA Action Area -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <button onclick="openAuthModal('signup')" class="w-full sm:w-auto px-8 py-4 rounded-full bg-fen-blue text-white font-semibold text-base transition-all duration-300 shadow-[0_0_30px_rgba(113,135,255,0.4)] hover:shadow-[0_0_45px_rgba(113,135,255,0.65)] hover:bg-[#6077f5] active:scale-98 flex items-center justify-center gap-2">
+            <span>Get Started</span>
+            <span class="text-lg">→</span>
+          </button>
+          <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 rounded-full bg-surface custom-border text-primary-text font-semibold text-base hover:bg-elevated hover:border-fen-blue/40 transition-all flex items-center justify-center gap-2">
+            <span>See How It Works</span>
+          </a>
+        </div>
+
+        <p class="text-xs text-muted-text/80 tracking-wide font-medium">
+          Built for students who have too much going on. Zero credit card required.
+        </p>
+      </div>
+
+      <!-- ================= HERO VISUAL (CHAOS -> FENESTRA -> CLARITY) ================= -->
+      <div class="relative mt-16 lg:mt-24 max-w-5xl mx-auto">
+        
+        <!-- Window Light Backdrop Glow -->
+        <div class="absolute -inset-4 bg-gradient-to-tr from-fen-blue/20 via-fen-violet/15 to-window-light/10 rounded-[28px] blur-2xl -z-10 opacity-70"></div>
+
+        <!-- Floating Chaotic Input Fragments Converging -->
+        
+        <!-- Fragment 1: Screenshot OCR (Left Top) -->
+        <div class="hidden md:flex items-center gap-3 absolute -top-8 -left-8 lg:-left-12 z-20 bg-surface/90 backdrop-blur-md px-4 py-3 rounded-xl custom-border shadow-card-depth animate-float-slow">
+          <div class="w-8 h-8 rounded-lg bg-fen-blue/15 text-fen-blue flex items-center justify-center text-sm">📸</div>
+          <div class="text-left">
+            <span class="text-[10px] uppercase font-bold text-muted-text tracking-wider">Screenshot detected</span>
+            <p class="text-xs font-semibold text-primary-text leading-tight">"DBMS assignment due tomorrow 5 PM"</p>
+          </div>
+          <span class="w-1.5 h-1.5 rounded-full bg-window-light"></span>
+        </div>
+
+        <!-- Fragment 2: Event (Right Top) -->
+        <div class="hidden md:flex items-center gap-3 absolute -top-4 -right-6 lg:-right-10 z-20 bg-surface/90 backdrop-blur-md px-4 py-3 rounded-xl custom-border shadow-card-depth animate-float-delayed">
+          <div class="w-8 h-8 rounded-lg bg-window-light/15 text-window-light flex items-center justify-center text-sm">📅</div>
+          <div class="text-left">
+            <span class="text-[10px] uppercase font-bold text-muted-text tracking-wider">Group Slack ping</span>
+            <p class="text-xs font-semibold text-primary-text leading-tight">"Project Meeting · 7:00 PM"</p>
+          </div>
+          <span class="w-1.5 h-1.5 rounded-full bg-fen-mint"></span>
+        </div>
+
+        <!-- Fragment 3: Long-term Goal (Bottom Left) -->
+        <div class="hidden lg:flex items-center gap-3 absolute -bottom-6 -left-10 z-20 bg-surface/90 backdrop-blur-md px-4 py-3 rounded-xl custom-border shadow-card-depth animate-float-delayed">
+          <div class="w-8 h-8 rounded-lg bg-fen-mint/15 text-fen-mint flex items-center justify-center text-sm">🎯</div>
+          <div class="text-left">
+            <span class="text-[10px] uppercase font-bold text-muted-text tracking-wider">Semester ambition</span>
+            <p class="text-xs font-semibold text-primary-text leading-tight">"Master Postgres schema modeling"</p>
+          </div>
+          <span class="text-[11px] text-fen-mint font-semibold">Ready</span>
+        </div>
+
+        <!-- MAIN FENESTRA APPLICATION DASHBOARD PREVIEW -->
+        <div class="bg-midnight-subtle custom-border rounded-2xl md:rounded-[22px] overflow-hidden shadow-2xl relative">
+          
+          <!-- Mock Window Titlebar -->
+          <div class="bg-surface/80 px-4 py-3 border-b border-border-fen flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+              <span class="text-[11px] font-medium text-muted-text ml-3 tracking-wide flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-fen-blue"></span> fenestra.app/workspace/cherry
+              </span>
+            </div>
+            <div class="text-[11px] font-semibold text-window-light flex items-center gap-1.5 bg-elevated px-2.5 py-1 rounded-full custom-border">
+              <span>✦</span> Window open: Evening Calm
+            </div>
+          </div>
+
+          <!-- Dashboard Content Inner -->
+          <div class="p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-gradient-to-b from-surface/40 to-midnight">
+            
+            <!-- Left Column: Greetings, Today's Load & Flow -->
+            <div class="lg:col-span-7 space-y-6">
+              
+              <!-- Greeting & Today's Load -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface rounded-xl p-5 custom-border">
+                <div>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-muted-text">SATURDAY · ACTIVE DESK</span>
+                  <h3 class="text-lg font-bold text-primary-text">GOOD AFTERNOON, CHERRY</h3>
+                  <p class="text-xs text-muted-text mt-0.5">Your workload is paced. 50 minutes of deep focus available now.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-elevated px-4 py-2.5 rounded-lg custom-border self-start sm:self-auto">
+                  <div class="text-right">
+                    <span class="text-[10px] text-muted-text uppercase font-semibold">Today's Load</span>
+                    <div class="text-sm font-bold text-primary-text">3h 20m</div>
+                  </div>
+                  <div class="h-8 w-[1px] bg-border-fen"></div>
+                  <div class="text-center">
+                    <span class="text-[10px] text-fen-mint uppercase font-bold">Harmony</span>
+                    <div class="text-sm font-bold text-fen-mint">72%</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SIGNATURE CARD: WHAT NOW? -->
+              <div class="relative bg-surface rounded-xl p-6 custom-border overflow-hidden shadow-card-depth group hover:border-fen-blue/50 transition-colors">
+                <!-- Subtle Radial Amber/Blue Window Glow -->
+                <div class="absolute -right-8 -top-8 w-44 h-44 bg-gradient-to-bl from-window-light/25 via-fen-blue/15 to-transparent rounded-full blur-xl pointer-events-none"></div>
+
+                <div class="flex items-center justify-between mb-4 relative z-10">
+                  <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-elevated text-window-light text-xs font-bold tracking-wide custom-border">
+                    <span class="text-window-light">✦</span> WHAT NOW?
+                  </div>
+                  <span class="text-xs text-fen-urgent font-semibold bg-fen-urgent/10 px-2 py-0.5 rounded-md border border-fen-urgent/20">
+                    Due tomorrow · 5:00 PM
+                  </span>
+                </div>
+
+                <div class="relative z-10 mb-4">
+                  <h4 class="text-xl font-bold text-primary-text">DBMS Assignment</h4>
+                  <p class="text-xs text-muted-text mt-1">Entity-relationship schemas & SQL foreign key constraints</p>
+                </div>
+
+                <div class="flex items-center gap-4 text-xs text-muted-text pb-4 mb-4 border-b border-border-fen relative z-10">
+                  <span class="flex items-center gap-1 font-medium text-primary-text">
+                    <span class="text-fen-blue">⏱</span> 45 minutes estimated
+                  </span>
+                  <span>•</span>
+                  <span class="text-fen-mint">Optimal cognitive window</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                  <p class="text-xs text-muted-text italic">
+                    "You have a free 50-minute window before your 7:00 PM project sync."
+                  </p>
+                  <button onclick="openFocusModalDemo()" class="px-5 py-2.5 rounded-full bg-fen-blue hover:bg-[#6077f5] text-white text-xs font-bold tracking-wide flex items-center justify-center gap-2 shadow-md transition-all shrink-0">
+                    <span>START FOCUS</span>
+                    <span>→</span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- Live Timeline Strip -->
+              <div class="bg-surface/70 rounded-xl p-4 custom-border">
+                <span class="text-[11px] font-bold text-muted-text uppercase tracking-wider block mb-3">Adaptive Schedule · Real-Time</span>
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between text-xs bg-elevated px-3 py-2 rounded-lg custom-border">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-fen-mint"></span>
+                      <span class="font-medium text-primary-text">09:30 · Linear Algebra Problem Set</span>
+                    </div>
+                    <span class="text-[11px] text-fen-mint font-semibold">Done</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs bg-fen-blue/10 px-3 py-2 rounded-lg border border-fen-blue/30">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-fen-blue animate-pulse"></span>
+                      <span class="font-bold text-primary-text">Now · DBMS Assignment (ER Schemas)</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-fen-blue">45m window</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs bg-elevated px-3 py-2 rounded-lg custom-border text-muted-text">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-border-fen"></span>
+                      <span>19:00 · CampusFlow Project Meeting</span>
+                    </div>
+                    <span class="text-[11px]">Calendar Sync</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column: FENESTRA Quiet Intelligence Insight Panel -->
+            <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+              
+              <!-- AI Context Insight Panel -->
+              <div class="bg-surface rounded-xl p-5 custom-border">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold text-primary-text flex items-center gap-1.5">
+                    <span class="text-fen-blue">✦</span> FENESTRA noticed
+                  </span>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-fen-mint bg-fen-mint/10 px-2 py-0.5 rounded">Adaptive Sync</span>
+                </div>
+                <p class="text-xs text-muted-text leading-relaxed mb-4">
+                  "Your DBMS assignment is due tomorrow, and you currently have high cognitive energy. Tackling it now protects your entire Sunday for social rest."
+                </p>
+                <div class="space-y-2">
+                  <span class="text-[10px] font-bold text-muted-text uppercase tracking-wider">Why this was chosen:</span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <span class="text-[11px] bg-elevated px-2.5 py-1 rounded-md text-primary-text custom-border font-medium">✓ Due tomorrow</span>
+                    <span class="text-[11px] bg-elevated px-2.5 py-1 rounded-md text-primary-text custom-border font-medium">✓ 50m available</span>
+                    <span class="text-[11px] bg-elevated px-2.5 py-1 rounded-md text-primary-text custom-border font-medium">✓ Matches peak energy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Energy Gauge & Overload Guard Mini Preview -->
+              <div class="bg-surface rounded-xl p-5 custom-border">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold text-primary-text">Energy-Aware Pacing</span>
+                  <span class="text-xs text-window-light font-semibold">⚡ High (78%)</span>
+                </div>
+                <!-- Interactive Mini Energy Slider -->
+                <div class="w-full bg-midnight rounded-full h-2 mb-3 overflow-hidden border border-border-fen">
+                  <div class="bg-gradient-to-r from-fen-blue via-fen-violet to-window-light h-full rounded-full" style="width: 78%;"></div>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-muted-text">
+                  <span>😴 Restorative</span>
+                  <span class="text-fen-mint font-medium">Auto-buffering meals & breaks</span>
+                  <span>⚡ Peak</span>
+                </div>
+              </div>
+
+              <!-- Mini Focus Sanctuary Link -->
+              <div class="p-4 rounded-xl bg-gradient-to-br from-elevated to-midnight custom-border flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-window-light/10 text-window-light flex items-center justify-center text-sm">
+                    🌙
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-primary-text">Focus Sanctuary</div>
+                    <div class="text-[11px] text-muted-text">Acoustic Kyoto rain ready</div>
+                  </div>
+                </div>
+                <button onclick="openFocusModalDemo()" class="text-xs text-fen-blue hover:text-white font-semibold">
+                  Test Window →
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trust / Micro Statement Bar -->
+      <div class="mt-16 pt-8 border-t border-border-fen/60 text-center">
+        <p class="text-[11px] tracking-[0.28em] font-extrabold text-muted-text uppercase">
+          CAPTURE <span class="text-fen-blue mx-2">•</span> UNDERSTAND <span class="text-fen-blue mx-2">•</span> PLAN <span class="text-fen-blue mx-2">•</span> ADAPT
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= THE PROBLEM SECTION ================= -->
+  <section class="py-24 bg-midnight-subtle border-t border-border-fen/70 relative">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold text-fen-urgent uppercase tracking-widest bg-fen-urgent/10 px-3 py-1 rounded-full border border-fen-urgent/20">The Reality</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mt-4 mb-4">
+          YOUR LIFE DOESN’T ARRIVE AS A TODO LIST.
+        </h2>
+        <p class="text-base sm:text-lg text-muted-text">
+          It arrives as panicked screenshots, Discord pings, syllabi changes, club commitments, unexpected meetings, and mental overload.
+        </p>
+      </div>
+
+      <!-- Chaos Cards Scattering -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+        
+        <div class="bg-surface p-5 rounded-xl custom-border shadow-sm transform hover:-translate-y-1 transition-transform">
+          <div class="text-2xl mb-3">📱</div>
+          <span class="text-[10px] font-bold uppercase text-muted-text tracking-wider">Unorganized Screenshot</span>
+          <p class="text-sm font-semibold text-primary-text mt-1">"DBMS assignment due tomorrow by 5:00 PM in portal."</p>
+          <span class="text-[11px] text-fen-urgent font-medium mt-3 block">High Urgency · Loose Context</span>
+        </div>
+
+        <div class="bg-surface p-5 rounded-xl custom-border shadow-sm transform hover:-translate-y-1 transition-transform">
+          <div class="text-2xl mb-3">📅</div>
+          <span class="text-[10px] font-bold uppercase text-muted-text tracking-wider">Group Chat Ping</span>
+          <p class="text-sm font-semibold text-primary-text mt-1">"Can everyone make the project sprint call at 7:00 PM tonight?"</p>
+          <span class="text-[11px] text-window-light font-medium mt-3 block">Calendar Conflict Detected</span>
+        </div>
+
+        <div class="bg-surface p-5 rounded-xl custom-border shadow-sm transform hover:-translate-y-1 transition-transform">
+          <div class="text-2xl mb-3">🎓</div>
+          <span class="text-[10px] font-bold uppercase text-muted-text tracking-wider">Campus Email</span>
+          <p class="text-sm font-semibold text-primary-text mt-1">"Design system & HCI workshop this Saturday morning."</p>
+          <span class="text-[11px] text-fen-blue font-medium mt-3 block">Opportunity · Flexible</span>
+        </div>
+
+        <div class="bg-surface p-5 rounded-xl custom-border shadow-sm transform hover:-translate-y-1 transition-transform">
+          <div class="text-2xl mb-3">🎯</div>
+          <span class="text-[10px] font-bold uppercase text-muted-text tracking-wider">Personal Goal</span>
+          <p class="text-sm font-semibold text-primary-text mt-1">"Build 2 full-stack projects to prep for summer internships."</p>
+          <span class="text-[11px] text-fen-mint font-medium mt-3 block">Ambition · Needs Routine</span>
+        </div>
+
+      </div>
+
+      <!-- Unifying Statement Card -->
+      <div class="bg-elevated/70 rounded-2xl p-8 sm:p-10 custom-border max-w-3xl mx-auto text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-fen-blue/10 via-transparent to-window-light/10 pointer-events-none"></div>
+        <div class="w-12 h-12 rounded-full bg-fen-blue/20 text-fen-blue mx-auto flex items-center justify-center text-xl mb-4">
+          🪟
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-primary-text tracking-tight mb-3">
+          FENESTRA CONNECTS THE PIECES.
+        </h3>
+        <p class="text-sm sm:text-base text-muted-text max-w-xl mx-auto leading-relaxed">
+          Instead of making you manually configure 100 columns and due dates, FENESTRA digests the mess, extracts the true academic context, and aligns it with your biological energy and available hours.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS (CHAOS TO CLARITY) ================= -->
+  <section id="how-it-works" class="py-28 relative">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="text-xs font-bold text-fen-blue uppercase tracking-widest bg-fen-blue/10 px-3 py-1 rounded-full border border-fen-blue/20">The Mechanism</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mt-4 mb-4">
+          FROM CHAOS TO CLARITY.
+        </h2>
+        <p class="text-base sm:text-lg text-muted-text">
+          Three intelligent phases that turn raw, stressful academic clutter into an unhurried daily plan.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Step 1 -->
+        <div class="bg-surface rounded-2xl p-8 custom-border relative group hover:border-fen-blue/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-fen-blue to-white/40">01</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-fen-blue bg-fen-blue/10 px-2.5 py-1 rounded-md">CAPTURE</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-3">Just give it to FENESTRA.</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              Upload a messy screenshot. Paste a professor's raw email. Forward a Discord deadline announcement. Add a rough goal. Don’t organize anything first.
+            </p>
+          </div>
+
+          <!-- Mini visual -->
+          <div class="bg-midnight rounded-xl p-4 custom-border space-y-2.5">
+            <div class="flex items-center gap-2 text-xs text-primary-text">
+              <span class="text-sm">📸</span>
+              <span class="font-medium truncate">slide_syllabus_page12.png</span>
+              <span class="text-[10px] text-fen-mint ml-auto font-bold">Uploaded</span>
+            </div>
+            <div class="h-1.5 w-full bg-elevated rounded-full overflow-hidden">
+              <div class="bg-fen-blue h-full w-full animate-pulse"></div>
+            </div>
+            <span class="text-[11px] text-muted-text block text-right">Extracting tasks & time blocks...</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-surface rounded-2xl p-8 custom-border relative group hover:border-window-light/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-window-light to-white/40">02</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-window-light bg-window-light/10 px-2.5 py-1 rounded-md">UNDERSTAND</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-3">Figures out what matters.</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              FENESTRA identifies hard deadlines, realistic estimated effort, cognitive load categories, your available time windows, and surrounding syllabus context.
+            </p>
+          </div>
+
+          <!-- Mini visual -->
+          <div class="bg-midnight rounded-xl p-4 custom-border space-y-2">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-muted-text">Identified Deadline:</span>
+              <span class="text-fen-urgent font-bold">Tomorrow 5:00 PM</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-muted-text">Estimated Effort:</span>
+              <span class="text-primary-text font-bold">45 mins</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-muted-text">Cognitive Weight:</span>
+              <span class="text-window-light font-bold">High Analytical</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-surface rounded-2xl p-8 custom-border relative group hover:border-fen-mint/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-fen-mint to-white/40">03</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-fen-mint bg-fen-mint/10 px-2.5 py-1 rounded-md">ADAPT</span>
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-3">Your plan changes with you.</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              Energy changes? FENESTRA adapts. New emergency meeting? It reschedules without guilt. Overloaded? It auto-protects your meals and sleep.
+            </p>
+          </div>
+
+          <!-- Mini visual -->
+          <div class="bg-midnight rounded-xl p-4 custom-border space-y-2">
+            <div class="flex items-center gap-2 text-xs text-fen-mint">
+              <span>⚡</span>
+              <span class="font-bold">Energy adjusted: 40%</span>
+            </div>
+            <p class="text-[11px] text-muted-text leading-tight">
+              3 flexible tasks shifted to Monday. Evening wind-down locked at 10:00 PM.
+            </p>
+            <div class="text-[10px] text-fen-blue font-semibold uppercase tracking-wider">
+              Zero anxiety backlog
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SIGNATURE PRODUCT SECTION (SO... WHAT SHOULD I DO RIGHT NOW?) ================= -->
+  <section class="py-24 bg-midnight border-y border-border-fen/70 relative overflow-hidden">
+    <!-- Soft warm amber radial glow behind card -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-r from-fen-blue/15 via-fen-violet/10 to-window-light/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      
+      <span class="text-xs font-bold text-window-light uppercase tracking-widest bg-window-light/10 px-3.5 py-1 rounded-full border border-window-light/25 inline-block mb-4">
+        Decision Fatigue Eliminated
+      </span>
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mb-4">
+        SO... WHAT SHOULD I DO RIGHT NOW?
+      </h2>
+
+      <p class="text-base sm:text-lg text-muted-text max-w-xl mx-auto mb-12">
+        Most productivity tools give you a giant intimidating list of 40 unorganized items. FENESTRA answers the only question that matters.
+      </p>
+
+      <!-- Signature Card in Full Splendor -->
+      <div class="bg-surface rounded-2xl p-8 sm:p-10 custom-border shadow-window-glow text-left max-w-2xl mx-auto relative group">
+        
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-border-fen">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-window-light animate-pulse"></span>
+            <span class="text-sm font-bold tracking-widest text-window-light uppercase">✦ WHAT NOW?</span>
+          </div>
+          <span class="text-xs font-semibold text-fen-urgent bg-fen-urgent/10 px-3 py-1 rounded-full border border-fen-urgent/30">
+            Due tomorrow · 5:00 PM
+          </span>
+        </div>
+
+        <div class="mb-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-muted-text">Active Recommendation</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-primary-text mt-1">DBMS Assignment</h3>
+          <p class="text-sm text-muted-text mt-1">Entity-relationship schemas & SQL foreign key constraints</p>
+        </div>
+
+        <div class="bg-elevated/80 rounded-xl p-4 custom-border mb-6">
+          <span class="text-[11px] font-bold text-window-light uppercase tracking-wider block mb-1">WHY NOW?</span>
+          <p class="text-sm text-primary-text leading-relaxed">
+            You have a free 50-minute window before your 7:00 PM team sync, and this is your nearest high-cognitive deadline. Pacing it now ensures your Sunday stays free.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+          <div class="flex items-center gap-3 text-xs text-muted-text self-start sm:self-auto">
+            <span class="flex items-center gap-1 font-semibold text-primary-text">
+              <span class="text-fen-blue">⏱</span> 45 min sprint
+            </span>
+            <span>•</span>
+            <span class="text-fen-mint font-medium">Notifications silenced</span>
+          </div>
+
+          <button onclick="openFocusModalDemo()" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-fen-blue hover:bg-[#6077f5] text-white font-bold text-sm tracking-wide shadow-lg shadow-fen-blue/30 transition-all flex items-center justify-center gap-2">
+            <span>START FOCUS</span>
+            <span>→</span>
+          </button>
+        </div>
+
+      </div>
+
+      <p class="text-sm text-muted-text mt-10 max-w-md mx-auto">
+        FENESTRA doesn’t just store your tasks. <br class="hidden sm:inline">
+        <span class="text-primary-text font-semibold">It helps you decide what to do next.</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ================= COMPREHENSIVE FEATURES ================= -->
+  <section id="features" class="py-28 bg-midnight-subtle relative">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="text-xs font-bold text-fen-blue uppercase tracking-widest bg-fen-blue/10 px-3 py-1 rounded-full border border-fen-blue/20">The Ecosystem</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mt-4 mb-4">
+          YOUR WHOLE STUDENT LIFE.<br>ONE WINDOW.
+        </h2>
+        <p class="text-base sm:text-lg text-muted-text">
+          Engineered specifically around how modern students live, think, learn, and recharge.
+        </p>
+      </div>
+
+      <!-- Feature Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- 1. Smart Capture -->
+        <div class="bg-surface rounded-2xl p-7 custom-border flex flex-col justify-between hover:border-fen-blue/50 transition-colors">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-fen-blue/15 text-fen-blue flex items-center justify-center text-xl mb-5">
+              📸
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-2">Smart Capture</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              Throw anything at it: course syllabus PDFs, handwritten whiteboard photos, messy Discord texts, group chat screenshots. FENESTRA converts messy chaos into structured, time-stamped tasks.
+            </p>
+          </div>
+          <div class="p-3 bg-midnight rounded-xl custom-border text-xs text-muted-text">
+            <span class="text-fen-mint font-semibold">Optical AI:</span> Extracts course codes, dates, point weights automatically.
+          </div>
+        </div>
+
+        <!-- 2. Adaptive Planning -->
+        <div class="bg-surface rounded-2xl p-7 custom-border flex flex-col justify-between hover:border-fen-blue/50 transition-colors">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-window-light/15 text-window-light flex items-center justify-center text-xl mb-5">
+              📐
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-2">Adaptive Planning</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              Your calendar isn't carved in stone. FENESTRA weighs real-time deadlines, available hours between lectures, commute times, and personal energy to draft realistic schedules that don't shatter.
+            </p>
+          </div>
+          <div class="p-3 bg-midnight rounded-xl custom-border text-xs text-muted-text">
+            <span class="text-window-light font-semibold">Dynamic Recalibration:</span> Late for class? The rest of the day smooths out.
+          </div>
+        </div>
+
+        <!-- 3. Energy-Aware Planning -->
+        <div class="bg-surface rounded-2xl p-7 custom-border flex flex-col justify-between hover:border-fen-blue/50 transition-colors">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-fen-mint/15 text-fen-mint flex items-center justify-center text-xl mb-5">
+              ⚡
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-2">Energy-Aware Pacing</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              Some days you have 100%. Some days you're running on 20% after an all-nighter. Slide your energy gauge and watch FENESTRA gently postpone heavy proofs and keep only lightweight reviews.
+            </p>
+          </div>
+          <div class="p-3 bg-midnight rounded-xl custom-border text-xs text-muted-text">
+            <span class="text-fen-mint font-semibold">Zero-Guilt Rest:</span> Productive pacing without burnout or guilt spirals.
+          </div>
+        </div>
+
+        <!-- 4. Overload Protection -->
+        <div class="bg-surface rounded-2xl p-7 custom-border flex flex-col justify-between hover:border-fen-blue/50 transition-colors">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-fen-urgent/15 text-fen-urgent flex items-center justify-center text-xl mb-5">
+              🛡️
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-2">Overload Protection</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              6 hours of work scheduled into a 3-hour evening window? FENESTRA refuses to let you burn out. It safeguards your dinner, breaks, and 8 hours of sleep, auto-deferring non-critical tasks.
+            </p>
+          </div>
+          <div class="p-3 bg-midnight rounded-xl custom-border text-xs text-muted-text">
+            <span class="text-fen-urgent font-semibold">Sanctuary Guard:</span> Meals & rest are protected calendar blocks.
+          </div>
+        </div>
+
+        <!-- 5. Goals + Habits -->
+        <div class="bg-surface rounded-2xl p-7 custom-border flex flex-col justify-between hover:border-fen-blue/50 transition-colors">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-fen-violet/15 text-fen-violet flex items-center justify-center text-xl mb-5">
+              🌱
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-2">Goals & Habits</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              Don’t lose sight of the bigger picture. Track semester ambitions, portfolio builds, research papers, and hydration. FENESTRA breaks mammoth dreams into 25-minute digestible micro-steps.
+            </p>
+          </div>
+          <div class="p-3 bg-midnight rounded-xl custom-border text-xs text-muted-text">
+            <span class="text-fen-violet font-semibold">Micro-Cadence:</span> Long-term milestones connected to today's desk.
+          </div>
+        </div>
+
+        <!-- 6. Student Life Beyond Class -->
+        <div class="bg-surface rounded-2xl p-7 custom-border flex flex-col justify-between hover:border-fen-blue/50 transition-colors">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-window-light/15 text-window-light flex items-center justify-center text-xl mb-5">
+              ☕
+            </div>
+            <h3 class="text-xl font-bold text-primary-text mb-2">Real Student Life</h3>
+            <p class="text-sm text-muted-text leading-relaxed mb-6">
+              College isn't just grinding in a library cubicle. Manage hackathons, club meetings, music practice, laundry routines, and social nights—because real health means enjoying your youth.
+            </p>
+          </div>
+          <div class="p-3 bg-midnight rounded-xl custom-border text-xs text-muted-text">
+            <span class="text-window-light font-semibold">Whole-Human Design:</span> Life, study, and stillness in balance.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= WHY FENESTRA (NOT ANOTHER TODO LIST) ================= -->
+  <section id="why-fenestra" class="py-24 relative">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold text-window-light uppercase tracking-widest bg-window-light/10 px-3 py-1 rounded-full border border-window-light/20">The Philosophy</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mt-4 mb-4">
+          NOT ANOTHER TODO LIST.
+        </h2>
+        <p class="text-base text-muted-text">
+          A fundamental departure from the high-stress, corporate SaaS task dumps that leave students feeling guilty.
+        </p>
+      </div>
+
+      <!-- Comparison Matrix -->
+      <div class="space-y-4">
+        
+        <!-- Row 1 -->
+        <div class="bg-surface rounded-2xl p-6 sm:p-8 custom-border grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-muted-text/70">Traditional Task Managers</span>
+            <p class="text-base sm:text-lg text-muted-text italic">"Here's a scary list of 52 overdue items. Good luck."</p>
+          </div>
+          <div class="space-y-1 bg-elevated/70 p-4 sm:p-5 rounded-xl border border-fen-blue/30">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-fen-blue">FENESTRA Approach</span>
+            <p class="text-base sm:text-lg text-primary-text font-bold">"Here’s what matters right now. Everything else is safely asleep."</p>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="bg-surface rounded-2xl p-6 sm:p-8 custom-border grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-muted-text/70">Traditional Planners</span>
+            <p class="text-base sm:text-lg text-muted-text italic">"You manually schedule and rearrange every minute of your day."</p>
+          </div>
+          <div class="space-y-1 bg-elevated/70 p-4 sm:p-5 rounded-xl border border-window-light/30">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-window-light">FENESTRA Approach</span>
+            <p class="text-base sm:text-lg text-primary-text font-bold">"Your schedule adapts to you when lecture runs over or plans shift."</p>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="bg-surface rounded-2xl p-6 sm:p-8 custom-border grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div class="space-y-1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-muted-text/70">Toxic Hustle Productivity</span>
+            <p class="text-base sm:text-lg text-muted-text italic">"Do more. Optimize every breath. Never sleep."</p>
+          </div>
+          <div class="space-y-1 bg-elevated/70 p-4 sm:p-5 rounded-xl border border-fen-mint/30">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-fen-mint">FENESTRA Approach</span>
+            <p class="text-base sm:text-lg text-primary-text font-bold">"Do what matters. Protect your peace. Be proud of quiet progress."</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= AI INTELLIGENCE SECTION ================= -->
+  <section class="py-24 bg-midnight-subtle border-y border-border-fen/70 relative">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold text-fen-blue uppercase tracking-widest bg-fen-blue/10 px-3 py-1 rounded-full border border-fen-blue/20">Quiet Intelligence</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mt-4 mb-4">
+          IT DOESN'T JUST STORE YOUR LIFE.<br>IT UNDERSTANDS THE CONTEXT.
+        </h2>
+        <p class="text-base text-muted-text">
+          Not a generic chatbot. A context graph connecting all the moving parts of your student semester.
+        </p>
+      </div>
+
+      <!-- Network Graphic Representation -->
+      <div class="bg-surface rounded-3xl p-8 sm:p-12 custom-border relative overflow-hidden">
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-10 text-center">
+          <div class="bg-elevated p-3 rounded-xl custom-border">
+            <span class="text-xs font-bold text-primary-text block">Tasks</span>
+            <span class="text-[10px] text-muted-text">Syllabus weights</span>
+          </div>
+          <div class="bg-elevated p-3 rounded-xl custom-border">
+            <span class="text-xs font-bold text-fen-urgent block">Deadlines</span>
+            <span class="text-[10px] text-muted-text">Real portal cutoffs</span>
+          </div>
+          <div class="bg-elevated p-3 rounded-xl custom-border">
+            <span class="text-xs font-bold text-window-light block">Energy</span>
+            <span class="text-[10px] text-muted-text">Circadian curve</span>
+          </div>
+          <div class="bg-elevated p-3 rounded-xl custom-border">
+            <span class="text-xs font-bold text-fen-blue block">Calendar</span>
+            <span class="text-[10px] text-muted-text">Buffers & commute</span>
+          </div>
+          <div class="bg-elevated p-3 rounded-xl custom-border">
+            <span class="text-xs font-bold text-fen-mint block">Goals</span>
+            <span class="text-[10px] text-muted-text">Career & habits</span>
+          </div>
+          <div class="bg-elevated p-3 rounded-xl custom-border">
+            <span class="text-xs font-bold text-fen-violet block">Routines</span>
+            <span class="text-[10px] text-muted-text">Sleep & tea time</span>
+          </div>
+        </div>
+
+        <!-- Converged Into: Your Next Best Action -->
+        <div class="max-w-xl mx-auto bg-midnight rounded-2xl p-6 sm:p-8 custom-border shadow-window-glow text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fen-blue/15 text-fen-blue text-xs font-bold uppercase mb-4">
+            ✦ Converged Synthesis
+          </div>
+          <h4 class="text-xl sm:text-2xl font-black text-primary-text mb-3">YOUR NEXT BEST ACTION</h4>
+          <p class="text-sm text-muted-text mb-6">
+            DBMS assignment selected because it has the highest deadline friction, matches your current peak focus window, and prevents an overloaded Sunday evening.
+          </p>
+
+          <!-- Expandable Card Simulation -->
+          <div class="text-left bg-elevated rounded-xl p-4 custom-border text-xs space-y-2">
+            <div class="font-bold text-window-light flex items-center gap-1.5">
+              <span>✦</span> WHY THIS SPECIFIC SELECTION?
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-muted-text pt-1">
+              <div class="flex items-center gap-1.5 text-primary-text">
+                <span class="text-fen-mint font-bold">✓</span> Due tomorrow at 5:00 PM
+              </div>
+              <div class="flex items-center gap-1.5 text-primary-text">
+                <span class="text-fen-mint font-bold">✓</span> Exactly 45m required
+              </div>
+              <div class="flex items-center gap-1.5 text-primary-text">
+                <span class="text-fen-mint font-bold">✓</span> Matches current 78% energy
+              </div>
+              <div class="flex items-center gap-1.5 text-primary-text">
+                <span class="text-fen-mint font-bold">✓</span> Relieves Sunday night anxiety
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOCUS MODE SECTION ================= -->
+  <section id="focus-mode" class="py-28 bg-[#070B15] relative overflow-hidden">
+    <!-- Blue/Violet Atmospheric Glow Behind Timer -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[500px] bg-gradient-to-tr from-fen-blue/20 via-fen-violet/15 to-window-light/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      
+      <span class="text-xs font-bold text-fen-mint uppercase tracking-widest bg-fen-mint/10 px-3.5 py-1 rounded-full border border-fen-mint/25 inline-block mb-4">
+        Zero Distraction Sanctuary
+      </span>
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mb-4">
+        WHEN IT’S TIME TO FOCUS,<br>
+        <span class="text-muted-text font-medium">EVERYTHING ELSE CAN WAIT.</span>
+      </h2>
+
+      <p class="text-base text-muted-text max-w-lg mx-auto mb-14">
+        No sidebar. No notifications. No infinite scrolling. Just one task, a calming window light, and deep mental flow.
+      </p>
+
+      <!-- Focus Mode Simulation Card -->
+      <div class="bg-surface/90 rounded-3xl p-8 sm:p-12 custom-border max-w-md mx-auto shadow-2xl relative">
+        <div class="text-[11px] font-bold text-fen-blue uppercase tracking-widest mb-2">FOCUS MODE SANCTUARY</div>
+        <h3 class="text-xl font-bold text-primary-text mb-8">DBMS Assignment</h3>
+
+        <!-- Timer Ring Mockup -->
+        <div class="relative w-48 h-48 mx-auto flex items-center justify-center mb-8">
+          <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" stroke="#17223A" stroke-width="4" fill="none"/>
+            <circle cx="50" cy="50" r="44" stroke="#7187FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="276" stroke-dashoffset="65" fill="none"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="text-4xl font-black text-primary-text tracking-tight">42:18</span>
+            <span class="text-[10px] text-window-light font-bold uppercase tracking-wider mt-1">RESTFUL FLOW</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <button class="px-6 py-2.5 rounded-full bg-elevated custom-border text-xs font-bold text-primary-text hover:bg-border-fen transition-colors">
+            PAUSE
+          </button>
+          <button class="px-6 py-2.5 rounded-full bg-fen-mint text-[#070B15] text-xs font-bold hover:bg-[#8ee0b6] transition-colors">
+            COMPLETE
+          </button>
+        </div>
+
+        <p class="text-xs text-muted-text italic font-serif text-center">
+          “Everything else can wait. Your window into deep thought is open.”
+        </p>
+
+        <!-- Sound Architecture Pill -->
+        <div class="mt-6 pt-4 border-t border-border-fen flex items-center justify-between text-[11px] text-muted-text">
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-fen-blue"></span> Kyoto Cedar Rain & Night Breeze
+          </span>
+          <span class="text-fen-blue font-bold">432Hz</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MOBILE APP & RESPONSIVE SECTION ================= -->
+  <section class="py-24 bg-midnight relative border-t border-border-fen/70">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left: Text -->
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-bold text-fen-blue uppercase tracking-widest bg-fen-blue/10 px-3 py-1 rounded-full border border-fen-blue/20 inline-block">
+            Seamless Continuity
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight">
+            YOUR WINDOW,<br>WHEREVER YOU ARE.
+          </h2>
+          <p class="text-base text-muted-text leading-relaxed">
+            FENESTRA is natively designed for both desktop study desks and mobile on-the-go sprints. Capture a flyer on campus between lectures, check what matters while walking to the library, and dive into focus mode on your phone.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-fen-blue/20 text-fen-blue flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</div>
+              <div>
+                <h4 class="text-sm font-bold text-primary-text">Capture on the go</h4>
+                <p class="text-xs text-muted-text">Snap classroom whiteboards or forward assignment emails straight into the Inbox.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-window-light/20 text-window-light flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</div>
+              <div>
+                <h4 class="text-sm font-bold text-primary-text">Instant WHAT NOW? card</h4>
+                <p class="text-xs text-muted-text">Always know the single best next action when you open the app between classes.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-fen-mint/20 text-fen-mint flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</div>
+              <div>
+                <h4 class="text-sm font-bold text-primary-text">Zero-cloud lag synchronization</h4>
+                <p class="text-xs text-muted-text">Everything seamlessly stays consistent between your Mac/PC and iOS/Android app.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Mobile Device Showcase Mockup -->
+        <div class="lg:col-span-6 flex justify-center">
+          
+          <!-- Smartphone Outer Shell -->
+          <div class="w-[320px] sm:w-[350px] bg-[#070B15] rounded-[44px] p-4 custom-border shadow-2xl relative border-4 border-border-fen/80">
+            <!-- Dynamic Island / Speaker Notch -->
+            <div class="w-28 h-5 bg-midnight rounded-full mx-auto mb-4 custom-border"></div>
+
+            <!-- Mobile Inner Screen -->
+            <div class="bg-midnight-subtle rounded-[32px] p-5 space-y-4 border border-border-fen/50 text-left">
+              
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-muted-text font-bold uppercase">GOOD AFTERNOON</span>
+                  <div class="text-sm font-bold text-primary-text">Cherry's Window</div>
+                </div>
+                <span class="w-7 h-7 rounded-full bg-elevated custom-border flex items-center justify-center text-xs">
+                  🪟
+                </span>
+              </div>
+
+              <!-- Mobile WHAT NOW? Card -->
+              <div class="bg-surface rounded-2xl p-4 custom-border shadow-sm relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 w-20 h-20 bg-window-light/15 rounded-full blur-lg"></div>
+                <div class="flex items-center justify-between text-[10px] font-bold text-window-light mb-2">
+                  <span>✦ WHAT NOW?</span>
+                  <span class="text-fen-urgent">Tomorrow 5 PM</span>
+                </div>
+                <div class="text-base font-bold text-primary-text">DBMS Assignment</div>
+                <div class="text-[11px] text-muted-text mt-0.5">45 min sprint recommended</div>
+                <button onclick="openFocusModalDemo()" class="mt-3 w-full py-2 rounded-xl bg-fen-blue text-white text-xs font-bold text-center">
+                  Start Focus
+                </button>
+              </div>
+
+              <!-- Mobile Timeline Mini -->
+              <div class="space-y-2">
+                <span class="text-[10px] font-bold text-muted-text uppercase">Adaptive Flow</span>
+                <div class="bg-elevated p-2.5 rounded-xl custom-border flex items-center justify-between text-xs">
+                  <span class="text-primary-text">14:00 · Stillness Window</span>
+                  <span class="text-fen-mint text-[10px] font-bold">Active</span>
+                </div>
+                <div class="bg-elevated p-2.5 rounded-xl custom-border flex items-center justify-between text-xs">
+                  <span class="text-muted-text">19:00 · Project Meeting</span>
+                  <span class="text-[10px] text-muted-text">CampusFlow</span>
+                </div>
+              </div>
+
+              <!-- Mobile Bottom Bar Mockup -->
+              <div class="pt-3 border-t border-border-fen flex justify-around text-muted-text text-sm">
+                <span class="text-fen-blue font-bold">● Home</span>
+                <span>Tasks</span>
+                <span>Focus</span>
+                <span>Rhythm</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE DEMO (SEE FENESTRA THINK) ================= -->
+  <section id="demo" class="py-24 bg-midnight-subtle border-t border-border-fen/70 relative">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      
+      <span class="text-xs font-bold text-window-light uppercase tracking-widest bg-window-light/10 px-3.5 py-1 rounded-full border border-window-light/25 inline-block mb-4">
+        Interactive Preview
+      </span>
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-primary-text tracking-tight mb-4">
+        SEE FENESTRA THINK.
+      </h2>
+      <p class="text-base text-muted-text max-w-xl mx-auto mb-12">
+        Test how the intelligence engine parses an unstructured student artifact into an adaptive timeline in seconds.
+      </p>
+
+      <!-- Interactive Stepper Simulator -->
+      <div class="bg-surface rounded-2xl p-6 sm:p-10 custom-border shadow-card-depth text-left">
+        
+        <!-- Step Indicators -->
+        <div class="flex items-center justify-between mb-8 overflow-x-auto hide-scrollbar gap-2 pb-2">
+          <button onclick="setDemoStep(1)" id="stepBtn1" class="demo-step-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-fen-blue text-white transition-all">
+            1. Upload
+          </button>
+          <span class="text-border-fen text-xs">→</span>
+          <button onclick="setDemoStep(2)" id="stepBtn2" class="demo-step-btn px-3 py-1.5 rounded-lg text-xs font-medium text-muted-text hover:text-white transition-all">
+            2. Extract
+          </button>
+          <span class="text-border-fen text-xs">→</span>
+          <button onclick="setDemoStep(3)" id="stepBtn3" class="demo-step-btn px-3 py-1.5 rounded-lg text-xs font-medium text-muted-text hover:text-white transition-all">
+            3. Inbox
+          </button>
+          <span class="text-border-fen text-xs">→</span>
+          <button onclick="setDemoStep(4)" id="stepBtn4" class="demo-step-btn px-3 py-1.5 rounded-lg text-xs font-medium text-muted-text hover:text-white transition-all">
+            4. Plan
+          </button>
+          <span class="text-border-fen text-xs">→</span>
+          <button onclick="setDemoStep(5)" id="stepBtn5" class="demo-step-btn px-3 py-1.5 rounded-lg text-xs font-medium text-muted-text hover:text-white transition-all">
+            5. Adapt
+          </button>
+        </div>
+
+        <!-- Step Dynamic Card -->
+        <div id="demoContent" class="bg-midnight rounded-xl p-6 custom-border min-h-[180px] flex flex-col justify-center">
+          <!-- Dynamically populated via JS -->
+          <div class="flex items-center gap-4">
+            <div class="text-3xl">📸</div>
+            <div>
+              <h4 class="text-base font-bold text-primary-text">Step 1: Upload Unstructured Screenshot</h4>
+              <p class="text-xs text-muted-text mt-1">You take a quick phone screenshot of your professor's slide stating: "DBMS ER diagram due tomorrow 5:00 PM on Canvas".</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo Next Control -->
+        <div class="mt-6 flex items-center justify-between">
+          <span class="text-xs text-muted-text" id="demoCounter">Step 1 of 5</span>
+          <div class="flex gap-2">
+            <button onclick="prevDemoStep()" class="px-4 py-2 rounded-lg bg-elevated custom-border text-xs font-semibold text-primary-text hover:bg-border-fen">Previous</button>
+            <button onclick="nextDemoStep()" class="px-5 py-2 rounded-lg bg-fen-blue text-xs font-bold text-white hover:bg-[#6077f5]">Next Step →</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SOCIAL PROOF / HACKATHON SECTION ================= -->
+  <section class="py-20 border-t border-border-fen/70 relative">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      
+      <span class="text-xs font-bold text-fen-mint uppercase tracking-widest bg-fen-mint/10 px-3 py-1 rounded-full border border-fen-mint/20 inline-block mb-3">
+        Campus Ground Truth
+      </span>
+
+      <h3 class="text-2xl sm:text-4xl font-extrabold text-primary-text tracking-tight mb-8">
+        BUILT FOR THE REALITY OF STUDENT LIFE.
+      </h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+        <div class="bg-surface p-5 rounded-xl custom-border">
+          <span class="text-base">📚</span>
+          <h4 class="text-sm font-bold text-primary-text mt-2">Assignments everywhere.</h4>
+          <p class="text-xs text-muted-text mt-1">Canvas, Blackboard, Notion, Slack, and email threads shouldn't require 5 open tabs.</p>
+        </div>
+        <div class="bg-surface p-5 rounded-xl custom-border">
+          <span class="text-base">⏳</span>
+          <h4 class="text-sm font-bold text-primary-text mt-2">Deadlines everywhere.</h4>
+          <p class="text-xs text-muted-text mt-1">High friction due dates lead to decision paralysis. Fenestra distills the noise into one card.</p>
+        </div>
+        <div class="bg-surface p-5 rounded-xl custom-border">
+          <span class="text-base">🔄</span>
+          <h4 class="text-sm font-bold text-primary-text mt-2">Plans constantly changing.</h4>
+          <p class="text-xs text-muted-text mt-1">When life happens, you shouldn't have to spend an hour manually fixing an entire calendar.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="py-28 relative overflow-hidden bg-gradient-to-b from-midnight to-[#070B15] border-t border-border-fen">
+    <!-- Window Light leak -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t from-fen-blue/20 via-window-light/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      
+      <div class="w-16 h-16 rounded-2xl bg-elevated custom-border mx-auto flex items-center justify-center text-2xl mb-8 shadow-window-glow">
+        🪟
+      </div>
+
+      <h2 class="text-4xl sm:text-6xl font-black text-primary-text tracking-tight mb-6">
+        READY TO SEE YOUR LIFE CLEARLY?
+      </h2>
+
+      <p class="text-lg text-muted-text max-w-xl mx-auto mb-10 leading-relaxed">
+        Give FENESTRA the chaos. We’ll help you find what matters, protect your evenings, and give you back your peace of mind.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button onclick="openAuthModal('signup')" class="w-full sm:w-auto px-9 py-4 rounded-full bg-fen-blue text-white font-bold text-base transition-all duration-300 shadow-[0_0_35px_rgba(113,135,255,0.45)] hover:shadow-[0_0_55px_rgba(113,135,255,0.7)] hover:bg-[#6077f5] active:scale-98">
+          Get Started for Free →
+        </button>
+        <button onclick="openAuthModal('signin')" class="w-full sm:w-auto px-8 py-4 rounded-full bg-surface custom-border text-primary-text font-bold text-base hover:bg-elevated transition-colors">
+          Sign In
+        </button>
+      </div>
+
+      <span class="text-xs text-muted-text mt-5 block font-medium">Free for college students • Takes 60 seconds to set up</span>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-midnight border-t border-border-fen py-16">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-border-fen/60">
+        
+        <!-- Col 1: Brand -->
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2.5">
+            <div class="w-7 h-7 rounded-lg bg-elevated custom-border flex items-center justify-center text-xs">
+              🪟
+            </div>
+            <span class="text-base font-bold tracking-[0.2em] text-primary-text">FENESTRA</span>
+          </div>
+          <p class="text-sm text-muted-text max-w-sm">
+            A window into your life. An AI-powered student-life caretaker turning everyday clutter into calm, adaptive clarity.
+          </p>
+          <span class="text-xs text-window-light font-semibold block pt-2">✦ "I've got the window open."</span>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div class="space-y-2.5">
+          <span class="text-xs font-bold text-primary-text uppercase tracking-wider block mb-2">Product</span>
+          <a href="#how-it-works" class="text-xs text-muted-text hover:text-white block">How It Works</a>
+          <a href="#features" class="text-xs text-muted-text hover:text-white block">Features</a>
+          <a href="#why-fenestra" class="text-xs text-muted-text hover:text-white block">Philosophy</a>
+          <a href="#demo" class="text-xs text-muted-text hover:text-white block">Interactive Demo</a>
+        </div>
+
+        <!-- Col 3: Account -->
+        <div class="space-y-2.5">
+          <span class="text-xs font-bold text-primary-text uppercase tracking-wider block mb-2">Account</span>
+          <button onclick="openAuthModal('signin')" class="text-xs text-muted-text hover:text-white block text-left">Sign In</button>
+          <button onclick="openAuthModal('signup')" class="text-xs text-muted-text hover:text-white block text-left">Create Free Account</button>
+          <button onclick="openAuthModal('forgot')" class="text-xs text-muted-text hover:text-white block text-left">Reset Password</button>
+        </div>
+
+        <!-- Col 4: Legal -->
+        <div class="space-y-2.5">
+          <span class="text-xs font-bold text-primary-text uppercase tracking-wider block mb-2">Trust & Legal</span>
+          <a href="#" class="text-xs text-muted-text hover:text-white block">Student Privacy Guarantee</a>
+          <a href="#" class="text-xs text-muted-text hover:text-white block">Terms of Service</a>
+          <a href="#" class="text-xs text-muted-text hover:text-white block">Academic Integrity Policy</a>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-text gap-4">
+        <span>© 2026 FENESTRA Technologies Inc. All rights reserved.</span>
+        <div class="flex items-center gap-4">
+          <span class="hover:text-white cursor-pointer">Status: All Systems Still</span>
+          <span>•</span>
+          <span class="text-window-light">Nocturne 6,500K</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= AUTHENTICATION MODAL (SIGN IN / SIGN UP / FORGOT) ================= -->
+  <div id="authModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 transition-opacity duration-300">
+    
+    <div class="bg-surface rounded-3xl custom-border max-w-md w-full p-8 shadow-window-glow relative overflow-hidden transform transition-all scale-95" id="authBox">
+      
+      <!-- Close Button -->
+      <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-muted-text hover:text-white p-2 rounded-lg bg-elevated custom-border">
+        ✕
+      </button>
+
+      <!-- Brand Indicator -->
+      <div class="flex items-center gap-2 mb-6">
+        <div class="w-8 h-8 rounded-lg bg-elevated custom-border flex items-center justify-center text-sm">
+          🪟
+        </div>
+        <span class="text-sm font-bold tracking-[0.2em] text-primary-text">FENESTRA</span>
+      </div>
+
+      <!-- SIGN UP VIEW -->
+      <div id="signupView" class="space-y-4">
+        <div>
+          <h3 class="text-2xl font-bold text-primary-text">Start seeing things clearly.</h3>
+          <p class="text-xs text-muted-text mt-1">Join thousands of students turning campus chaos into calm.</p>
+        </div>
+
+        <button onclick="fakeGoogleAuth()" class="w-full py-2.5 rounded-xl bg-elevated hover:bg-border-fen custom-border text-xs font-semibold text-primary-text flex items-center justify-center gap-2.5 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.8 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"/></svg>
+          Continue with Google
+        </button>
+
+        <div class="flex items-center gap-2 text-[10px] text-muted-text uppercase my-2">
+          <div class="h-[1px] bg-border-fen flex-1"></div>
+          <span>or email</span>
+          <div class="h-[1px] bg-border-fen flex-1"></div>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'signup')" class="space-y-3">
+          <div>
+            <label class="text-[11px] font-semibold text-muted-text block mb-1">Your Full Name</label>
+            <input type="text" required placeholder="Cherry Lin" class="w-full px-3.5 py-2.5 rounded-xl bg-midnight border border-border-fen text-xs text-primary-text focus:outline-none focus:border-fen-blue">
+          </div>
+          <div>
+            <label class="text-[11px] font-semibold text-muted-text block mb-1">Student / University Email</label>
+            <input type="email" required placeholder="cherry@berkeley.edu" class="w-full px-3.5 py-2.5 rounded-xl bg-midnight border border-border-fen text-xs text-primary-text focus:outline-none focus:border-fen-blue">
+          </div>
+          <div>
+            <label class="text-[11px] font-semibold text-muted-text block mb-1">Password</label>
+            <input type="password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-midnight border border-border-fen text-xs text-primary-text focus:outline-none focus:border-fen-blue">
+          </div>
+          <button type="submit" class="w-full py-3 rounded-xl bg-fen-blue hover:bg-[#6077f5] text-white text-xs font-bold transition-all shadow-md mt-2">
+            Create Free Account →
+          </button>
+        </form>
+
+        <p class="text-center text-xs text-muted-text pt-2">
+          Already have an account? 
+          <button onclick="switchAuthTab('signin')" class="text-fen-blue font-semibold hover:underline">Sign In</button>
+        </p>
+      </div>
+
+      <!-- SIGN IN VIEW -->
+      <div id="signinView" class="space-y-4 hidden">
+        <div>
+          <h3 class="text-2xl font-bold text-primary-text">Welcome back.</h3>
+          <p class="text-xs text-muted-text mt-1">Your quiet window is waiting for you.</p>
+        </div>
+
+        <button onclick="fakeGoogleAuth()" class="w-full py-2.5 rounded-xl bg-elevated hover:bg-border-fen custom-border text-xs font-semibold text-primary-text flex items-center justify-center gap-2.5 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.8 0 12s.7 3.3 1.9 5.7l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16c1.8 3.7 5.6 7 10.1 7z"/></svg>
+          Continue with Google
+        </button>
+
+        <div class="flex items-center gap-2 text-[10px] text-muted-text uppercase my-2">
+          <div class="h-[1px] bg-border-fen flex-1"></div>
+          <span>or with email</span>
+          <div class="h-[1px] bg-border-fen flex-1"></div>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'signin')" class="space-y-3">
+          <div>
+            <label class="text-[11px] font-semibold text-muted-text block mb-1">Email Address</label>
+            <input type="email" required placeholder="cherry@berkeley.edu" class="w-full px-3.5 py-2.5 rounded-xl bg-midnight border border-border-fen text-xs text-primary-text focus:outline-none focus:border-fen-blue">
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-[11px] font-semibold text-muted-text">Password</label>
+              <button type="button" onclick="switchAuthTab('forgot')" class="text-[11px] text-fen-blue hover:underline">Forgot?</button>
+            </div>
+            <input type="password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-midnight border border-border-fen text-xs text-primary-text focus:outline-none focus:border-fen-blue">
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="rememberMe" class="rounded bg-midnight border-border-fen text-fen-blue focus:ring-0">
+            <label for="rememberMe" class="text-xs text-muted-text">Remember me for 30 days</label>
+          </div>
+          <button type="submit" class="w-full py-3 rounded-xl bg-fen-blue hover:bg-[#6077f5] text-white text-xs font-bold transition-all shadow-md mt-2">
+            Sign In to Fenestra →
+          </button>
+        </form>
+
+        <p class="text-center text-xs text-muted-text pt-2">
+          Don’t have an account yet? 
+          <button onclick="switchAuthTab('signup')" class="text-fen-blue font-semibold hover:underline">Create Account</button>
+        </p>
+      </div>
+
+      <!-- FORGOT PASSWORD VIEW -->
+      <div id="forgotView" class="space-y-4 hidden">
+        <div>
+          <h3 class="text-2xl font-bold text-primary-text">Reset your password.</h3>
+          <p class="text-xs text-muted-text mt-1">Enter your email and we'll send you an instant reset link.</p>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'forgot')" class="space-y-3" id="forgotForm">
+          <div>
+            <label class="text-[11px] font-semibold text-muted-text block mb-1">Your Registered Email</label>
+            <input type="email" required placeholder="cherry@berkeley.edu" class="w-full px-3.5 py-2.5 rounded-xl bg-midnight border border-border-fen text-xs text-primary-text focus:outline-none focus:border-fen-blue">
+          </div>
+          <button type="submit" class="w-full py-3 rounded-xl bg-fen-blue hover:bg-[#6077f5] text-white text-xs font-bold transition-all shadow-md mt-2">
+            Send Reset Link
+          </button>
+        </form>
+
+        <div id="forgotSuccess" class="hidden bg-elevated p-4 rounded-xl border border-fen-mint/40 text-center space-y-1">
+          <div class="text-fen-mint font-bold text-xs">✓ Reset link sent!</div>
+          <p class="text-xs text-muted-text">Check your inbox. We've sent instructions to your student email.</p>
+        </div>
+
+        <button onclick="switchAuthTab('signin')" class="w-full text-center text-xs text-muted-text hover:text-white pt-2 block">
+          ← Back to Sign In
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Navigation Toggle for Mobile
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.getElementById('hamburgerIcon');
+      const close = document.getElementById('closeIcon');
+      menu.classList.toggle('hidden');
+      hamburger.classList.toggle('hidden');
+      close.classList.toggle('hidden');
+    }
+
+    // Modal Manager
+    function openAuthModal(mode) {
+      const modal = document.getElementById('authModal');
+      const box = document.getElementById('authBox');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        box.classList.remove('scale-95');
+        box.classList.add('scale-100');
+      }, 10);
+      switchAuthTab(mode);
+    }
+
+    function closeAuthModal() {
+      const modal = document.getElementById('authModal');
+      const box = document.getElementById('authBox');
+      box.classList.remove('scale-100');
+      box.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    function switchAuthTab(tab) {
+      document.getElementById('signupView').classList.add('hidden');
+      document.getElementById('signinView').classList.add('hidden');
+      document.getElementById('forgotView').classList.add('hidden');
+
+      if (tab === 'signup') document.getElementById('signupView').classList.remove('hidden');
+      if (tab === 'signin') document.getElementById('signinView').classList.remove('hidden');
+      if (tab === 'forgot') {
+        document.getElementById('forgotView').classList.remove('hidden');
+        document.getElementById('forgotSuccess').classList.add('hidden');
+        document.getElementById('forgotForm').classList.remove('hidden');
+      }
+    }
+
+    function handleAuthSubmit(e, type) {
+      e.preventDefault();
+      if (type === 'forgot') {
+        document.getElementById('forgotForm').classList.add('hidden');
+        document.getElementById('forgotSuccess').classList.remove('hidden');
+        return;
+      }
+
+      // Smooth simulated entry into Fenestra authenticated experience
+      const btn = e.target.querySelector('button[type="submit"]');
+      const oldText = btn.innerHTML;
+      btn.innerHTML = '<span class="animate-pulse">Opening Fenestra Window...</span>';
+      
+      setTimeout(() => {
+        closeAuthModal();
+        alert('Welcome to FENESTRA! Directing to your quiet workspace...');
+        btn.innerHTML = oldText;
+      }, 700);
+    }
+
+    function fakeGoogleAuth() {
+      alert('Connecting to Google Single-Sign-On... Redirecting to Fenestra workspace.');
+      closeAuthModal();
+    }
+
+    function openFocusModalDemo() {
+      const focusEl = document.getElementById('focus-mode');
+      if (focusEl) {
+        focusEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Interactive Demo Stepper Logic
+    const demoSteps = [
+      {
+        step: 1,
+        title: "Step 1: Upload Unstructured Screenshot",
+        desc: "You take a quick photo of your professor's lecture slide stating: 'DBMS ER diagram assignment due tomorrow 5:00 PM on Canvas portal'. No need to categorize or type.",
+        icon: "📸",
+        pill: "Optical Intake"
+      },
+      {
+        step: 2,
+        title: "Step 2: Optical AI Parsing & Entity Extraction",
+        desc: "FENESTRA's vision engine instantly extracts the course entity (Database Systems IV), the exact deadline (Tomorrow, 5:00 PM), and calculates the 45-minute effort required.",
+        icon: "🧠",
+        pill: "Context Decoded"
+      },
+      {
+        step: 3,
+        title: "Step 3: Routed to Digital Desk Inbox",
+        desc: "Instead of being forgotten in your camera roll, the assignment enters your CampusFlow study desk with verified priority tags (#database, #urgent).",
+        icon: "📥",
+        pill: "Structured Artifact"
+      },
+      {
+        step: 4,
+        title: "Step 4: Circadian Rhythm & Calendar Slotting",
+        desc: "FENESTRA analyzes your afternoon schedule, identifies an open 50-minute buffer before your 7:00 PM meeting, and positions the sprint right now.",
+        icon: "📐",
+        pill: "Adaptive Scheduling"
+      },
+      {
+        step: 5,
+        title: "Step 5: Dynamic Energy Adaptation",
+        desc: "Feel drained after lab? Fenestra shifts the schedule effortlessly: protecting your dinner, keeping the DBMS sprint, and moving optional reading to Monday.",
+        icon: "⚡",
+        pill: "Zero Guilt Balance"
+      }
+    ];
+
+    let currentStepIndex = 0;
+
+    function renderDemoStep(idx) {
+      const item = demoSteps[idx];
+      const container = document.getElementById('demoContent');
+      const counter = document.getElementById('demoCounter');
+      counter.innerText = `Step ${item.step} of 5`;
+
+      container.innerHTML = `
+        <div class="flex items-start gap-4 animate-fade-in">
+          <div class="text-3xl p-3 bg-surface rounded-2xl custom-border shrink-0">${item.icon}</div>
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-window-light uppercase tracking-wider">${item.pill}</span>
+            </div>
+            <h4 class="text-lg font-bold text-primary-text">${item.title}</h4>
+            <p class="text-xs sm:text-sm text-muted-text leading-relaxed">${item.desc}</p>
+          </div>
+        </div>
+      `;
+
+      // Update button styles
+      document.querySelectorAll('.demo-step-btn').forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = "demo-step-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-fen-blue text-white transition-all";
+        } else {
+          btn.className = "demo-step-btn px-3 py-1.5 rounded-lg text-xs font-medium text-muted-text hover:text-white transition-all";
+        }
+      });
+    }
+
+    function setDemoStep(num) {
+      currentStepIndex = num - 1;
+      renderDemoStep(currentStepIndex);
+    }
+
+    function nextDemoStep() {
+      if (currentStepIndex < demoSteps.length - 1) {
+        currentStepIndex++;
+        renderDemoStep(currentStepIndex);
+      } else {
+        currentStepIndex = 0;
+        renderDemoStep(currentStepIndex);
+      }
+    }
+
+    function prevDemoStep() {
+      if (currentStepIndex > 0) {
+        currentStepIndex--;
+        renderDemoStep(currentStepIndex);
+      }
+    }
+  </script>
+</body>
+</html>

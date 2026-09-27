@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FENESTRA — Adaptive Student Caretaker &amp; Focus OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="min-h-screen antialiased">
+
+  <!-- ========================================================================
+       SMOOTH AMBIENT CURSOR LIGHT AURA (Follows Mouse Without Blocking Text)
+       ======================================================================== -->
+  <div id="cursor-ambient-light" class="cursor-ambient-light"></div>
+
+  <!-- ========================================================================
+       DYNAMIC ISLAND HUD CAPSULE (Top-Center Notification Pill)
+       ======================================================================== -->
+  <div id="hud-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[120] flex flex-col items-center gap-2 pointer-events-none"></div>
+
+  <!-- ========================================================================
+       STAGE 1: APPLE FLAGSHIP + HIGH-CONTRAST BLACK/WHITE LANDING PAGE
+       ======================================================================== -->
+  <div id="stage-landing" class="stage-view min-h-screen flex flex-col relative">
+
+    <!-- Subtle Architectural Grid Backdrop -->
+    <div class="bg-architectural-grid fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- 56px Liquid Glass Header -->
+    <header class="hig-nav sticky top-0 z-40 h-14 px-4 sm:px-6 flex items-center justify-between">
+      <div class="max-w-[1240px] w-full mx-auto flex items-center justify-between gap-4">
+        <!-- Clean Wordmark (No Pseudo Logo Box) -->
+        <a href="#" class="font-bold text-base tracking-tight hover:opacity-80 transition-opacity" style="color: var(--label-primary);">
+          Fenestra
+        </a>
+
+        <!-- Minimal Clean Navigation -->
+        <nav class="hidden md:flex items-center gap-6 text-xs font-medium" style="color: var(--label-secondary);">
+          <a href="#features" class="hover:text-[var(--label-primary)] transition-colors">Features</a>
+          <a href="#preview" class="hover:text-[var(--label-primary)] transition-colors">Preview</a>
+          <a href="#workflow" class="hover:text-[var(--label-primary)] transition-colors">How It Works</a>
+          <a href="#bento" class="hover:text-[var(--label-primary)] transition-colors">Principles</a>
+        </nav>
+
+        <!-- Right Controls: Apple Switch + Clean Actions -->
+        <div class="flex items-center gap-2.5">
+          <!-- Apple iOS Theme Switch (No Popups!) -->
+          <button
+            type="button"
+            onclick="toggleTheme()"
+            class="apple-theme-switch"
+            role="switch"
+            aria-label="Toggle light and dark theme"
+            title="Toggle Appearance"
+          >
+            <span class="switch-knob">
+              <span class="ms-icon text-[13px] icon-moon">dark_mode</span>
+              <span class="ms-icon text-[13px] icon-sun">light_mode</span>
+            </span>
+          </button>
+
+          <button onclick="goToStage('auth', 'signin')" class="hig-dynamic-btn hidden sm:inline-flex">
+            <span class="ms-icon text-sm">login</span>
+            <span class="btn-text">Sign In</span>
+          </button>
+
+          <button onclick="enterDemoWorkspace('today')" class="hig-btn-primary hig-btn-compact">
+            <span class="ms-icon text-sm">rocket_launch</span>
+            <span>Launch</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 relative z-10">
+
+      <!-- HERO SECTION WITH HIGH-CONTRAST WHITE KINETIC WORD SLOT -->
+      <section class="max-w-[1160px] mx-auto px-6 pt-16 pb-12 text-center">
+
+
+        <h1 class="hig-display max-w-4xl mx-auto mb-6">
+          <span class="kinetic-hover-text">Work</span>
+          <span class="kinetic-hover-text">at</span>
+          <span class="kinetic-hover-text">the</span>
+          <span class="kinetic-hover-text font-editorial font-normal">rhythm</span>
+          <span class="kinetic-hover-text">of</span>
+          <br class="hidden sm:block" />
+          <span onclick="cycleKineticWord()" class="kinetic-word-slot cursor-pointer mt-2" title="Click to cycle kinetic mode">
+            <span id="kinetic-word-track" class="kinetic-word-track">
+              <span class="kinetic-word-item">Peak Flow.</span>
+              <span class="kinetic-word-item">Real Energy.</span>
+              <span class="kinetic-word-item">Deep Focus.</span>
+              <span class="kinetic-word-item">Calm Clarity.</span>
+            </span>
+          </span>
+        </h1>
+
+        <p class="hig-body max-w-xl mx-auto text-base sm:text-lg mb-8">
+          Extract deadlines from screenshots, align work with your daily energy, and protect your sleep.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+          <button onclick="enterDemoWorkspace('today')" class="hig-btn-primary magnetic-btn px-6">
+            <span class="ms-icon text-base">bolt</span>
+            <span>Launch</span>
+          </button>
+          <button onclick="goToStage('auth', 'signin')" class="hig-btn-secondary magnetic-btn px-5">
+            <span class="ms-icon text-base">login</span>
+            <span>Sign In</span>
+          </button>
+          <button onclick="openHelpModal()" class="hig-btn-secondary px-5" title="Shortcuts &amp; Guide">
+            <span class="ms-icon text-base">help</span>
+            <span>Guide</span>
+          </button>
+        </div>
+
+
+
+        <!-- 4 Metrics Strip -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 max-w-4xl mx-auto text-left">
+          <div onclick="selectInteractiveCard(this)" class="bento-card bento-card-highlight p-5 cursor-pointer">
+            <div class="flex items-center justify-between mb-1">
+              <span class="hig-caption">OCR Speed</span>
+              <span class="ms-icon text-sm">document_scanner</span>
+            </div>
+            <div class="hig-title-2 tabular-nums">0.04s</div>
+            <div class="hig-footnote mt-0.5">Chats &amp; notices</div>
+          </div>
+          <div onclick="selectInteractiveCard(this)" class="bento-card p-5 cursor-pointer">
+            <div class="flex items-center justify-between mb-1">
+              <span class="hig-caption">Energy Scale</span>
+              <span class="ms-icon text-sm opacity-70">bolt</span>
+            </div>
+            <div class="hig-title-2 tabular-nums">1 – 5</div>
+            <div class="hig-footnote mt-0.5">Daily bandwidth</div>
+          </div>
+          <div onclick="selectInteractiveCard(this)" class="bento-card bento-card-highlight p-5 cursor-pointer">
+            <div class="flex items-center justify-between mb-1">
+              <span class="hig-caption">Sleep Guard</span>
+              <span class="ms-icon text-sm">bedtime</span>
+            </div>
+            <div class="hig-title-2 tabular-nums">23:30</div>
+            <div class="hig-footnote mt-0.5">Evening cutoff</div>
+          </div>
+          <div onclick="selectInteractiveCard(this)" class="bento-card p-5 cursor-pointer">
+            <div class="flex items-center justify-between mb-1">
+              <span class="hig-caption">Shortcuts</span>
+              <span class="ms-icon text-sm opacity-70">terminal</span>
+            </div>
+            <div class="hig-title-2 tabular-nums">⌘K</div>
+            <div class="hig-footnote mt-0.5">Quick palette</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HIGH-CONTRAST WHITE KINETIC MARQUEE RIBBON -->
+      <div class="marquee-container my-4">
+        <div class="marquee-track">
+          <span>Screenshot OCR</span>
+          <span>✦</span>
+          <span>Energy Matching</span>
+          <span>✦</span>
+          <span>Single Task Focus</span>
+          <span>✦</span>
+          <span>Sleep Protection</span>
+          <span>✦</span>
+          <span>Habit Streaks</span>
+          <span>✦</span>
+          <span>Ambient Audio</span>
+          <span>✦</span>
+          <!-- Duplicate for seamless loop -->
+          <span>Screenshot OCR</span>
+          <span>✦</span>
+          <span>Energy Matching</span>
+          <span>✦</span>
+          <span>Single Task Focus</span>
+          <span>✦</span>
+          <span>Sleep Protection</span>
+          <span>✦</span>
+          <span>Habit Streaks</span>
+          <span>✦</span>
+          <span>Ambient Audio</span>
+        </div>
+      </div>
+
+      <!-- COMPLETE FEATURE DIRECTORY (#features — HIGHLIGHTED WHITE & OBSIDIAN CHECKERBOARD) -->
+      <section id="features" class="max-w-[1120px] mx-auto px-6 py-16">
+        <div class="mb-10">
+          <h2 class="hig-title-1">Features</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+
+          <!-- Feature 01 -->
+          <div onclick="spotlightFeatureCard(this)" class="bento-card bento-card-highlight feature-showcase-card p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="hig-title-2">Screenshot Capture</h3>
+                <span class="ms-icon">document_scanner</span>
+              </div>
+              <p class="hig-body mb-5">
+                Extracts titles, deadlines, and courses from chats, LMS portals, and photo notices.
+              </p>
+            </div>
+            <div class="inset-group">
+              <div class="inset-row">
+                <span class="hig-footnote">Time Verification</span>
+                <span class="hig-pill hig-pill-strong">AM / PM Check</span>
+              </div>
+              <div class="inset-row">
+                <span class="hig-footnote">Module</span>
+                <button onclick="event.stopPropagation(); enterDemoWorkspace('capture')" class="hig-btn-secondary hig-btn-compact">
+                  <span class="ms-icon text-xs">arrow_forward</span><span>Open</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 02 -->
+          <div onclick="spotlightFeatureCard(this)" class="bento-card feature-showcase-card p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="hig-title-2">Energy Matching</h3>
+                <span class="ms-icon">bolt</span>
+              </div>
+              <p class="hig-body mb-5">
+                Ranks tasks by your current focus level—promoting quick wins when tired and deep work when fresh.
+              </p>
+            </div>
+            <div class="inset-group">
+              <div class="inset-row">
+                <span class="hig-footnote">Low Energy</span>
+                <span class="hig-pill">Quick Wins</span>
+              </div>
+              <div class="inset-row">
+                <span class="hig-footnote">Module</span>
+                <button onclick="event.stopPropagation(); enterDemoWorkspace('today')" class="hig-btn-secondary hig-btn-compact">
+                  <span class="ms-icon text-xs">arrow_forward</span><span>Test</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 03 -->
+          <div onclick="spotlightFeatureCard(this)" class="bento-card bento-card-highlight feature-showcase-card p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="hig-title-2">What Now? Deck</h3>
+                <span class="ms-icon">swipe_left</span>
+              </div>
+              <p class="hig-body mb-5">
+                Isolates the single most important task to remove decision fatigue. Swipe left to defer.
+              </p>
+            </div>
+            <div class="inset-group">
+              <div class="inset-row">
+                <span class="hig-footnote">Gesture</span>
+                <span class="hig-pill hig-pill-strong">Swipe Left</span>
+              </div>
+              <div class="inset-row">
+                <span class="hig-footnote">Module</span>
+                <button onclick="event.stopPropagation(); enterDemoWorkspace('today')" class="hig-btn-secondary hig-btn-compact">
+                  <span class="ms-icon text-xs">arrow_forward</span><span>Try</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 04 -->
+          <div onclick="spotlightFeatureCard(this)" class="bento-card feature-showcase-card p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="hig-title-2">Goals &amp; Habits</h3>
+                <span class="ms-icon">auto_awesome</span>
+              </div>
+              <p class="hig-body mb-5">
+                Breaks semester goals into 30-minute daily steps and tracks daily consistency.
+              </p>
+            </div>
+            <div class="inset-group">
+              <div class="inset-row">
+                <span class="hig-footnote">Daily Steps</span>
+                <span class="hig-pill">1-Tap Add</span>
+              </div>
+              <div class="inset-row">
+                <span class="hig-footnote">Module</span>
+                <button onclick="event.stopPropagation(); enterDemoWorkspace('life')" class="hig-btn-secondary hig-btn-compact">
+                  <span class="ms-icon text-xs">arrow_forward</span><span>View</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 05 -->
+          <div onclick="spotlightFeatureCard(this)" class="bento-card bento-card-highlight feature-showcase-card p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="hig-title-2">Focus Audio</h3>
+                <span class="ms-icon">graphic_eq</span>
+              </div>
+              <p class="hig-body mb-5">
+                Distraction-free focus timer with synthesized rain, brown noise, and 40Hz audio.
+              </p>
+            </div>
+            <div class="inset-group">
+              <div class="inset-row">
+                <span class="hig-footnote">Audio</span>
+                <span class="hig-pill hig-pill-strong">3 Modes</span>
+              </div>
+              <div class="inset-row">
+                <span class="hig-footnote">Module</span>
+                <button onclick="event.stopPropagation(); enterDemoWorkspace('focus')" class="hig-btn-secondary hig-btn-compact">
+                  <span class="ms-icon text-xs">arrow_forward</span><span>Launch</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature 06 -->
+          <div onclick="spotlightFeatureCard(this)" class="bento-card feature-showcase-card p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="hig-title-2">Sleep Protection</h3>
+                <span class="ms-icon">bedtime</span>
+              </div>
+              <p class="hig-body mb-5">
+                One-tap rebalancing defers non-urgent work past your evening cutoff to protect your rest.
+              </p>
+            </div>
+            <div class="inset-group">
+              <div class="inset-row">
+                <span class="hig-footnote">Rest Boundary</span>
+                <span class="hig-pill tabular-nums">23:30</span>
+              </div>
+              <div class="inset-row">
+                <span class="hig-footnote">Module</span>
+                <button onclick="event.stopPropagation(); enterDemoWorkspace('today')" class="hig-btn-secondary hig-btn-compact">
+                  <span class="ms-icon text-xs">arrow_forward</span><span>Test</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- INTERACTIVE 3-MODE LIVE OS SHOWCASE WINDOW (#preview) -->
+      <section id="preview" class="max-w-[1120px] mx-auto px-6 py-12">
+        <div class="mb-6">
+          <h2 class="hig-title-1">Interactive Preview</h2>
+        </div>
+
+        <div class="bento-card p-6 sm:p-8">
+          <!-- Window Toolbar with Sliding Segmented Control -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b" style="border-color: var(--sys-hairline);">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full" style="background: var(--sys-tertiary);"></span>
+              <span class="w-3 h-3 rounded-full" style="background: var(--sys-tertiary);"></span>
+              <span class="w-3 h-3 rounded-full" style="background: var(--sys-tertiary);"></span>
+              <span class="hig-caption ml-2">Fenestra Studio — Interactive Preview</span>
+            </div>
+
+            <!-- Sliding Segmented Control -->
+            <div id="lander-seg-control" class="hig-segmented" role="tablist">
+              <div class="hig-segmented-thumb"></div>
+              <button type="button" onclick="switchLanderTab('capture', 0)" class="hig-segmented-btn is-active" data-seg-index="0">
+                <span class="ms-icon text-sm">center_focus_strong</span>
+                <span>Capture</span>
+              </button>
+              <button type="button" onclick="switchLanderTab('energy', 1)" class="hig-segmented-btn" data-seg-index="1">
+                <span class="ms-icon text-sm">bolt</span>
+                <span>Energy</span>
+              </button>
+              <button type="button" onclick="switchLanderTab('focus', 2)" class="hig-segmented-btn" data-seg-index="2">
+                <span class="ms-icon text-sm">self_improvement</span>
+                <span>Focus</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pane 1: Smart Capture Preview -->
+          <div id="lander-pane-capture" class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <div class="bento-card bento-card-highlight p-6 flex flex-col justify-between">
+              <div>
+                <div class="hig-caption mb-2">Unstructured Source</div>
+                <div class="hig-headline mb-3">WhatsApp Group · CSE Sem-5</div>
+                <p class="font-editorial text-2xl leading-snug">
+                  “Guys reminder, CN record submission tomorrow before 4:30 PM. Lab internal marks depend on this, don’t be late!”
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t flex items-center justify-between" style="border-color: rgba(0,0,0,0.12);">
+                <span class="hig-caption">Parser</span>
+                <span class="hig-pill hig-pill-strong">98% Match</span>
+              </div>
+            </div>
+
+            <div class="inset-group flex flex-col justify-between">
+              <div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Extracted Task</span>
+                  <span class="hig-headline">CN Record Submission</span>
+                </div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Deadline Window</span>
+                  <span class="hig-headline tabular-nums">Tomorrow · 4:30 PM</span>
+                </div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Time Precision</span>
+                  <span class="hig-pill hig-pill-strong">Exact Match</span>
+                </div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Estimated Effort</span>
+                  <span class="hig-footnote tabular-nums">45 min · High Priority</span>
+                </div>
+              </div>
+              <div class="p-4 flex justify-end">
+                <button onclick="enterDemoWorkspace('capture')" class="hig-btn-primary hig-btn-compact"><span class="ms-icon text-sm">arrow_forward</span><span>Capture</span></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 2: Energy Shuffler Preview -->
+          <div id="lander-pane-energy" class="hidden grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <div class="bento-card bento-card-highlight p-6 flex flex-col justify-between">
+              <div>
+                <div class="hig-caption mb-2">Energy Calibration</div>
+                <div class="hig-title-2 mb-2">Level 2 · <span class="font-editorial font-normal">Low Energy</span></div>
+                <p class="hig-body">
+                  Defers heavy tasks and surfaces quick wins so you maintain momentum without burnout.
+                </p>
+              </div>
+              <div class="grid grid-cols-5 gap-2 mt-6">
+                <div class="h-10 rounded-lg flex items-center justify-center text-xs font-semibold tabular-nums" style="background: rgba(0,0,0,0.08);">1</div>
+                <div class="h-10 rounded-lg flex items-center justify-center text-xs font-semibold tabular-nums" style="background: var(--highlight-pill-bg); color: var(--highlight-pill-text);">2 · Low</div>
+                <div class="h-10 rounded-lg flex items-center justify-center text-xs font-semibold tabular-nums" style="background: rgba(0,0,0,0.08);">3</div>
+                <div class="h-10 rounded-lg flex items-center justify-center text-xs font-semibold tabular-nums" style="background: rgba(0,0,0,0.08);">4</div>
+                <div class="h-10 rounded-lg flex items-center justify-center text-xs font-semibold tabular-nums" style="background: rgba(0,0,0,0.08);">5</div>
+              </div>
+            </div>
+
+            <div class="inset-group flex flex-col justify-center">
+              <div class="inset-row">
+                <div>
+                  <div class="hig-headline">Club Orientation Slides</div>
+                  <div class="hig-footnote">30m · Quick Win</div>
+                </div>
+                <span class="hig-pill hig-pill-strong">Promoted to #1</span>
+              </div>
+              <div class="inset-row opacity-60">
+                <div>
+                  <div class="hig-headline">DBMS ER Normalization</div>
+                  <div class="hig-footnote">90m · Deep Sprint</div>
+                </div>
+                <span class="hig-pill">Deferred to Morning</span>
+              </div>
+              <div class="inset-row opacity-60">
+                <div>
+                  <div class="hig-headline">Sleep Cutoff Guard</div>
+                  <div class="hig-footnote tabular-nums">11:30 PM Protected Boundary</div>
+                </div>
+                <span class="hig-pill">Active</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pane 3: Single Focus Preview -->
+          <div id="lander-pane-focus" class="hidden grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <div class="bento-card bento-card-highlight p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="hig-pill hig-pill-strong">Up Next · Single Task</span>
+                  <span class="hig-caption tabular-nums">50m Sprint</span>
+                </div>
+                <div class="hig-title-2 mb-2">Complete Project Prototype</div>
+                <p class="hig-body">
+                  Isolates the single next priority that matches your current window and energy.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t flex items-center justify-between" style="border-color: rgba(0,0,0,0.12);">
+                <span class="hig-caption">Gesture</span>
+                <span class="hig-footnote">Drag card left to defer</span>
+              </div>
+            </div>
+
+            <div class="inset-group p-6 flex flex-col items-center justify-center text-center">
+              <div class="hig-caption mb-2">Focus Timer</div>
+              <div class="hig-display tabular-nums mb-2">50:00</div>
+              <p class="hig-footnote mb-5">Built-in ambient soundscapes</p>
+              <button onclick="enterDemoWorkspace('focus')" class="hig-btn-primary"><span class="ms-icon text-base">play_arrow</span><span>Focus</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTERACTIVE 4-STEP WORKFLOW SCRUBBER (#workflow) -->
+      <section id="workflow" class="max-w-[1120px] mx-auto px-6 py-12">
+        <div class="bento-card p-8 sm:p-10">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 mb-8 border-b" style="border-color: var(--sys-hairline);">
+            <div>
+              <h2 class="hig-title-1">How It Works</h2>
+            </div>
+
+            <div id="workflow-seg-control" class="hig-segmented" role="tablist">
+              <div class="hig-segmented-thumb"></div>
+              <button type="button" onclick="switchWorkflowStep(0)" class="hig-segmented-btn is-active" data-seg-index="0">01 Capture</button>
+              <button type="button" onclick="switchWorkflowStep(1)" class="hig-segmented-btn" data-seg-index="1">02 Calibrate</button>
+              <button type="button" onclick="switchWorkflowStep(2)" class="hig-segmented-btn" data-seg-index="2">03 Focus</button>
+              <button type="button" onclick="switchWorkflowStep(3)" class="hig-segmented-btn" data-seg-index="3">04 Protect</button>
+            </div>
+          </div>
+
+          <div id="workflow-step-content" class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div class="md:col-span-7">
+              <h3 id="wf-title" class="hig-title-2 mb-3">Capture from screenshots</h3>
+              <p id="wf-desc" class="hig-body text-base mb-6">
+                Drop screenshots from group chats or portal announcements. Deadlines and course details are extracted with time verification.
+              </p>
+              <button onclick="enterDemoWorkspace('today')" class="hig-btn-primary">
+                <span class="ms-icon text-base">arrow_forward</span>
+                <span>Try It</span>
+              </button>
+            </div>
+            <div class="md:col-span-5">
+              <div id="wf-visual" class="bento-card bento-card-highlight p-6">
+                <div class="hig-caption mb-2">Details</div>
+                <div class="hig-title-2 mb-4">Deadline Precision</div>
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between text-xs py-2 border-b" style="border-color: rgba(0,0,0,0.1);">
+                    <span>“Tomorrow at 4:30 PM”</span>
+                    <span class="hig-pill hig-pill-strong">Exact Locked</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs py-2 border-b" style="border-color: rgba(0,0,0,0.1);">
+                    <span>“Monday evening”</span>
+                    <span class="hig-pill">Prompts 6:30 PM / 8 PM</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs py-2">
+                    <span>“Submit by 9:00”</span>
+                    <span class="hig-pill">Prompts AM vs PM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- APPLE BENTO GRID ARCHITECTURE SECTION (#bento — 4-Column × 2-Row) -->
+      <section id="bento" class="max-w-[1120px] mx-auto px-6 py-14">
+        <div class="mb-8">
+          <h2 class="hig-title-1">Design &amp; Principles</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-stretch">
+
+          <!-- Row 1, Col 1-2: Bento Card (2x1) -->
+          <div class="bento-card p-8 md:col-span-2 flex flex-col justify-between">
+            <div>
+              <h3 class="hig-title-2 mb-2">Adaptive Scheduling</h3>
+              <p class="hig-body">
+                Traditional planners assume 100% capacity all day. Fenestra dynamically matches work to your actual energy and preserves nightly rest.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4">
+              <span class="hig-pill">Energy-Aware</span>
+              <span class="hig-pill">Sleep Cutoff</span>
+              <span class="hig-pill">Fast Capture</span>
+            </div>
+          </div>
+
+          <!-- Row 1, Col 3: Metric Card (1x1) -->
+          <div class="bento-card bento-card-highlight p-8 flex flex-col justify-between">
+            <div class="hig-caption">Active Focus</div>
+            <div>
+              <div class="text-6xl font-bold tracking-tight tabular-nums leading-none mb-2">1</div>
+              <p class="hig-footnote">One task shown at a time to prevent distraction.</p>
+            </div>
+          </div>
+
+          <!-- Row 1, Col 4: Metric Card (1x1) -->
+          <div class="bento-card p-8 flex flex-col justify-between">
+            <div class="hig-caption">Energy Scale</div>
+            <div>
+              <div class="text-6xl font-bold tracking-tight tabular-nums leading-none mb-2">1–5</div>
+              <p class="hig-footnote">Instant re-ranking from tired (1) to peak focus (5).</p>
+            </div>
+          </div>
+
+          <!-- Row 2, Col 1-2: Proportional Bar Chart Card (2x1) -->
+          <div class="bento-card p-8 md:col-span-2 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-4">
+              <span class="hig-caption">Workload by Energy</span>
+              <span class="hig-footnote tabular-nums">11:30 PM Sleep Cutoff</span>
+            </div>
+            <div class="space-y-3 my-auto">
+              <div class="flex items-center gap-3">
+                <span class="hig-footnote w-24 tabular-nums">5 · Peak Flow</span>
+                <div class="flex-1 h-2.5 rounded-full overflow-hidden" style="background: var(--sys-elevated);">
+                  <div class="h-full rounded-full" style="width: 92%; background: var(--accent-fill);"></div>
+                </div>
+                <span class="hig-caption w-16 text-right tabular-nums">90m Deep</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="hig-footnote w-24 tabular-nums">3 · Balanced</span>
+                <div class="flex-1 h-2.5 rounded-full overflow-hidden" style="background: var(--sys-elevated);">
+                  <div class="h-full rounded-full opacity-70" style="width: 60%; background: var(--accent-fill);"></div>
+                </div>
+                <span class="hig-caption w-16 text-right tabular-nums">45m Core</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="hig-footnote w-24 tabular-nums">1 · Exhausted</span>
+                <div class="flex-1 h-2.5 rounded-full overflow-hidden" style="background: var(--sys-elevated);">
+                  <div class="h-full rounded-full opacity-40" style="width: 28%; background: var(--accent-fill);"></div>
+                </div>
+                <span class="hig-caption w-16 text-right tabular-nums">15m Light</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2, Col 3-4: Quote Card (2x1) -->
+          <div class="bento-card bento-card-highlight p-8 md:col-span-2 flex flex-col justify-between">
+            <div class="hig-caption">Accuracy</div>
+            <blockquote class="font-editorial text-2xl leading-snug my-4">
+              “When a time is ambiguous, Fenestra prompts for confirmation rather than guessing.”
+            </blockquote>
+            <div class="flex items-center justify-between pt-2">
+              <span class="hig-footnote">Adaptive Scheduling</span>
+              <button onclick="enterDemoWorkspace('today')" class="hig-btn-secondary hig-btn-compact">
+                <span class="ms-icon text-xs">arrow_forward</span><span>Launch</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="border-t py-8 px-6 text-center relative z-10" style="border-color: var(--sys-hairline);">
+      <div class="max-w-[1120px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="hig-footnote">FENESTRA — Student Schedule &amp; Focus System</span>
+        <div class="flex items-center gap-6">
+          <button onclick="openCommandPalette()" class="hig-footnote hover:underline">Command Palette</button>
+          <button onclick="openHelpModal()" class="hig-footnote hover:underline">Shortcuts</button>
+          <button onclick="goToStage('auth', 'signin')" class="hig-footnote hover:underline">Sign In</button>
+          <button onclick="enterDemoWorkspace('today')" class="hig-footnote hover:underline">Workspace</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       STAGE 2: APPLE ID-STYLE AUTHENTICATION (#stage-auth)
+       ======================================================================== -->
+  <div id="stage-auth" class="stage-view hidden min-h-screen flex flex-col justify-between p-6 relative">
+    <div class="max-w-[1120px] w-full mx-auto flex items-center justify-between h-14">
+      <button onclick="goToStage('landing')" class="hig-btn-secondary hig-btn-compact">
+        <span class="ms-icon text-sm">arrow_back</span>
+        <span>Back</span>
+      </button>
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          onclick="toggleTheme()"
+          class="apple-theme-switch"
+          role="switch"
+          aria-label="Toggle light and dark theme"
+          title="Toggle Appearance"
+        >
+          <span class="switch-knob">
+            <span class="ms-icon text-[13px] icon-moon">dark_mode</span>
+            <span class="ms-icon text-[13px] icon-sun">light_mode</span>
+          </span>
+        </button>
+        <button onclick="openHelpModal()" class="hig-btn-secondary hig-btn-compact" title="Help">
+          <span class="ms-icon text-sm">help</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="w-full max-w-[420px] mx-auto my-auto py-8">
+      <div class="bento-card p-8">
+        <div class="text-center mb-6">
+          <h1 id="auth-heading" class="hig-title-2">Sign in to <span class="font-editorial font-normal text-2xl">Fenestra</span></h1>
+          <p id="auth-subheading" class="hig-footnote mt-1">Sign in to your account.</p>
+        </div>
+
+        <!-- Sliding Segmented Control for Sign In / Create Account -->
+        <div id="auth-seg-control" class="hig-segmented w-full mb-6" role="tablist">
+          <div class="hig-segmented-thumb"></div>
+          <button type="button" onclick="switchAuthTab('signin', 0)" class="hig-segmented-btn is-active" data-seg-index="0">Sign In</button>
+          <button type="button" onclick="switchAuthTab('signup', 1)" class="hig-segmented-btn" data-seg-index="1">Create Account</button>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+          <div id="auth-name-group" class="hidden space-y-1.5">
+            <label class="hig-caption block">Your Name</label>
+            <input id="auth-name-input" type="text" placeholder="Cherry" class="hig-input" />
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="hig-caption block">University Email</label>
+            <input id="auth-email-input" type="email" value="cherry@campus.edu" required class="hig-input" />
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="hig-caption block">Passkey / Password</label>
+            <input id="auth-pass-input" type="password" value="••••••••••••" required class="hig-input" />
+          </div>
+
+          <div id="auth-signup-prefs" class="hidden grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <label class="hig-caption block mb-1">Workload Rhythm</label>
+              <select id="auth-rhythm-select" class="hig-input text-xs py-2">
+                <option value="Project-heavy">Project-heavy</option>
+                <option value="Exam-focused">Exam-focused</option>
+                <option value="Balanced">Balanced</option>
+              </select>
+            </div>
+            <div>
+              <label class="hig-caption block mb-1">Sleep Cutoff</label>
+              <select id="auth-sleep-select" class="hig-input text-xs py-2 tabular-nums">
+                <option value="11:30 PM">11:30 PM</option>
+                <option value="11:00 PM">11:00 PM</option>
+                <option value="12:00 AM">12:00 AM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2 space-y-2.5">
+            <button type="submit" id="auth-submit-btn" class="hig-btn-primary w-full">
+              <span class="ms-icon text-sm">login</span>
+              <span>Continue</span>
+            </button>
+            <button type="button" onclick="enterDemoWorkspace('today')" class="hig-btn-secondary w-full">
+              <span class="ms-icon text-sm">person</span>
+              <span>Demo Login</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center hig-caption pb-2">Session saved locally</div>
+  </div>
+
+  <!-- ========================================================================
+       STAGE 3: COMPLETE PRO WORKSPACE DASHBOARD (#stage-app)
+        5+1 Integrated Modules: Today | Capture | Planner | Goals & Life | Focus | Profile
+       ======================================================================== -->
+  <div id="stage-app" class="stage-view hidden min-h-screen flex flex-col">
+
+    <!-- 56px Liquid Glass Top Command Bar -->
+    <header class="hig-nav sticky top-0 z-40 h-14 px-4 sm:px-6 flex items-center justify-between">
+      <div class="max-w-[1260px] w-full mx-auto flex items-center justify-between gap-3">
+
+        <!-- Left: Clean Brand Wordmark (No Pseudo Logo Box) -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="goToStage('landing')" class="font-bold text-base tracking-tight hover:opacity-80 transition-opacity" style="color: var(--label-primary);" title="Return to Landing">
+            Fenestra
+          </button>
+        </div>
+
+        <!-- Center: 5 Clean Apple Segmented Views -->
+        <div id="app-seg-control" class="hig-segmented overflow-x-auto" role="tablist">
+          <div class="hig-segmented-thumb"></div>
+          <button type="button" onclick="switchAppView('today', 0)" class="hig-segmented-btn is-active" data-seg-index="0" data-view="today">
+            <span class="ms-icon text-[15px]">bolt</span>
+            <span>Today</span>
+          </button>
+          <button type="button" onclick="switchAppView('capture', 1)" class="hig-segmented-btn" data-seg-index="1" data-view="capture">
+            <span class="ms-icon text-[15px]">center_focus_strong</span>
+            <span>Capture</span>
+          </button>
+          <button type="button" onclick="switchAppView('tasks', 2)" class="hig-segmented-btn" data-seg-index="2" data-view="tasks">
+            <span class="ms-icon text-[15px]">calendar_month</span>
+            <span>Planner</span>
+          </button>
+          <button type="button" onclick="switchAppView('life', 3)" class="hig-segmented-btn" data-seg-index="3" data-view="life">
+            <span class="ms-icon text-[15px]">auto_awesome</span>
+            <span>Goals</span>
+          </button>
+          <button type="button" onclick="switchAppView('profile', 4)" class="hig-segmented-btn" data-seg-index="4" data-view="profile">
+            <span class="ms-icon text-[15px]">person</span>
+            <span>Profile</span>
+          </button>
+        </div>
+
+        <!-- Right: Apple Switch + Dynamic Expanding Action Buttons -->
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Apple iOS Theme Switch (No Popups!) -->
+          <button
+            type="button"
+            onclick="toggleTheme()"
+            class="apple-theme-switch"
+            role="switch"
+            aria-label="Toggle light and dark theme"
+            title="Toggle Appearance"
+          >
+            <span class="switch-knob">
+              <span class="ms-icon text-[13px] icon-moon">dark_mode</span>
+              <span class="ms-icon text-[13px] icon-sun">light_mode</span>
+            </span>
+          </button>
+
+          <!-- Dynamic Expanding Command Palette Button -->
+          <button onclick="openCommandPalette()" class="hig-dynamic-btn" title="Command Palette (⌘K)">
+            <span class="kbd-badge text-[11px] px-1 py-0.5">⌘K</span>
+            <span class="btn-text">Search</span>
+          </button>
+
+          <!-- Dynamic Expanding Focus Button -->
+          <button onclick="enterDemoWorkspace('focus')" class="hig-dynamic-btn" title="Focus Mode">
+            <span class="ms-icon text-sm">self_improvement</span>
+            <span class="btn-text">Focus</span>
+          </button>
+
+          <!-- Dynamic Expanding Help Guide Button -->
+          <button onclick="openHelpModal()" class="hig-dynamic-btn" title="Shortcuts &amp; Guide (?)">
+            <span class="ms-icon text-sm">help</span>
+            <span class="btn-text">Guide</span>
+          </button>
+
+          <!-- Dynamic Expanding Exit Button -->
+          <button onclick="signOutToLanding()" class="hig-dynamic-btn" title="Exit to Landing">
+            <span class="ms-icon text-sm">logout</span>
+            <span class="btn-text">Exit</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Symmetrical Workspace Container -->
+    <main class="flex-1 max-w-[1260px] w-full mx-auto px-4 sm:px-6 py-6">
+
+
+
+      <!-- ====================================================================
+           VIEW 1: TODAY SANCTUARY (Caretaker Bar + What Now + Energy + Replan)
+           ==================================================================== -->
+      <section id="app-view-today" class="space-y-4">
+
+        <!-- Top Caretaker Bar: Telemetry + "Take Care of My Day" AI Button + Quick NLP -->
+        <div class="bento-card p-5 flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="live-dot"></span>
+                <span class="hig-caption">Status</span>
+              </div>
+              <div class="flex items-center gap-2.5 mt-1">
+                <span id="telemetry-load-text" class="hig-headline tabular-nums">68% Optimal Load</span>
+                <span id="nav-energy-pill" class="hig-pill hig-pill-strong tabular-nums">Energy 3/5</span>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="hidden sm:flex flex-col w-36 gap-1">
+              <div class="flex justify-between text-[11px] tabular-nums" style="color: var(--label-secondary);">
+                <span>Completed</span>
+                <span id="telemetry-done-ratio">1 / 6</span>
+              </div>
+              <div class="h-2 rounded-full overflow-hidden" style="background: var(--sys-elevated);">
+                <div id="telemetry-progress-bar" class="h-full rounded-full transition-all duration-500" style="width: 20%; background: var(--accent-fill);"></div>
+              </div>
+            </div>
+
+            <!-- Signature Rebalance Day Action -->
+            <button onclick="takeCareOfMyDay()" class="hig-btn-primary hig-btn-compact magnetic-btn" data-cursor-label="REBALANCE">
+              <span class="ms-icon text-sm">auto_fix_high</span>
+              <span>Rebalance Day</span>
+            </button>
+          </div>
+
+          <!-- Quick Natural Language Task Input -->
+          <form onsubmit="handleQuickNaturalAdd(event)" class="flex-1 max-w-lg flex items-center gap-2">
+            <input
+              id="quick-nlp-input"
+              type="text"
+              placeholder="Quick add: e.g. “Finish Compiler Notes tomorrow 6:00 PM #high”..."
+              class="hig-input text-sm py-2 min-h-[40px]"
+            />
+            <button type="submit" class="hig-btn-secondary hig-btn-compact shrink-0">
+              <span class="ms-icon text-sm">add</span>
+              <span>Add</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Row 1: 8-Col "What Now?" Hero Card (HIGHLIGHTED IN WHITE!) + 4-Col "Biometric Capacity" -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+
+          <!-- Left 8 Cols: Single "What Now?" Focus Card (HIGHLIGHTED IN CRISP WHITE CONTRAST!) -->
+          <div
+            id="what-now-card"
+            class="bento-card bento-card-highlight p-8 lg:col-span-8 flex flex-col justify-between cursor-grab active:cursor-grabbing"
+            data-cursor-label="DRAG / FOCUS"
+          >
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                <div class="flex items-center gap-2">
+                  <span class="hig-pill hig-pill-strong">
+                    <span class="ms-icon text-xs">bolt</span>
+                    <span>What Now?</span>
+                  </span>
+                  <span id="wn-course-tag" class="hig-pill">ACADEMIC</span>
+                </div>
+              </div>
+
+              <h1 id="wn-title" class="hig-title-1 mb-3">Complete project prototype</h1>
+              <p id="wn-reason" class="hig-body max-w-2xl mb-6">
+                Balanced 50m block · Fits cleanly before your 11:30 PM sleep boundary.
+              </p>
+            </div>
+
+            <div>
+              <!-- Metadata Bar -->
+              <div class="inset-group mb-6">
+                <div class="grid grid-cols-3 divide-x" style="border-color: rgba(0,0,0,0.1);">
+                  <div class="p-3.5 text-center">
+                    <div class="hig-caption mb-0.5">Duration</div>
+                    <div id="wn-duration" class="hig-headline tabular-nums">50 min</div>
+                  </div>
+                  <div class="p-3.5 text-center">
+                    <div class="hig-caption mb-0.5">Due Window</div>
+                    <div id="wn-deadline" class="hig-headline tabular-nums">Today · 5:00 PM</div>
+                  </div>
+                  <div class="p-3.5 text-center">
+                    <div class="hig-caption mb-0.5">Priority</div>
+                    <div id="wn-priority" class="hig-headline">High</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Row -->
+              <div class="flex flex-wrap items-center gap-2.5">
+                <button onclick="openFocusOverlay()" class="hig-btn-secondary magnetic-btn" style="background: var(--highlight-pill-bg); color: var(--highlight-pill-text);" title="Start Focus Session">
+                  <span class="ms-icon text-base">play_arrow</span>
+                  <span>Start</span>
+                </button>
+                <button onclick="completeCurrentWhatNow()" class="hig-btn-secondary" title="Complete Task">
+                  <span class="ms-icon text-base">check</span>
+                  <span>Done</span>
+                </button>
+                <button onclick="skipWhatNowTask()" class="hig-btn-secondary ml-auto" title="Defer to Next Task">
+                  <span class="ms-icon text-base">skip_next</span>
+                  <span>Skip</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right 4 Cols: Unified Biometric Capacity + Dynamic Replan Simulation -->
+          <div class="bento-card p-8 lg:col-span-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h2 id="energy-state-title" class="hig-title-2">Energy Level</h2>
+                <span id="energy-level-badge" class="hig-pill hig-pill-strong tabular-nums">3 / 5</span>
+              </div>
+              <p id="energy-state-desc" class="hig-footnote mb-4">
+                Balanced workload for 45–60 minute sessions.
+              </p>
+
+              <!-- Unified 5-Stop Sliding Segmented Energy Scrubber -->
+              <div id="energy-seg-control" class="hig-segmented w-full mb-5" role="radiogroup" aria-label="Energy Level">
+                <div class="hig-segmented-thumb"></div>
+                <button type="button" onclick="setEnergyLevel(1)" class="hig-segmented-btn tabular-nums" data-seg-index="0">1</button>
+                <button type="button" onclick="setEnergyLevel(2)" class="hig-segmented-btn tabular-nums" data-seg-index="1">2</button>
+                <button type="button" onclick="setEnergyLevel(3)" class="hig-segmented-btn is-active tabular-nums" data-seg-index="2">3</button>
+                <button type="button" onclick="setEnergyLevel(4)" class="hig-segmented-btn tabular-nums" data-seg-index="3">4</button>
+                <button type="button" onclick="setEnergyLevel(5)" class="hig-segmented-btn tabular-nums" data-seg-index="4">5</button>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div>
+              <div class="hig-caption mb-2">Quick Actions</div>
+              <div class="grid grid-cols-2 gap-2 mb-4">
+                <button onclick="simulateDynamicReplan('exhausted')" class="hig-btn-secondary hig-btn-compact justify-start text-xs" title="Tired: Promote quick wins">
+                  <span class="ms-icon text-sm">battery_1_bar</span>
+                  <span>Low Energy</span>
+                </button>
+                <button onclick="simulateDynamicReplan('meeting_cancelled')" class="hig-btn-secondary hig-btn-compact justify-start text-xs" title="Free slot opened">
+                  <span class="ms-icon text-sm">event_busy</span>
+                  <span>Free Slot</span>
+                </button>
+                <button onclick="simulateDynamicReplan('deadline_moved')" class="hig-btn-secondary hig-btn-compact justify-start text-xs" title="Reschedule tasks">
+                  <span class="ms-icon text-sm">update</span>
+                  <span>Reschedule</span>
+                </button>
+                <button onclick="applyOverloadRelief()" class="hig-btn-secondary hig-btn-compact justify-start text-xs" title="Protect evening rest">
+                  <span class="ms-icon text-sm">nightlight</span>
+                  <span>Rest Relief</span>
+                </button>
+              </div>
+
+              <!-- Summary Metrics -->
+              <div class="inset-group">
+                <div class="inset-row py-2.5 min-h-[42px]">
+                  <span class="hig-footnote">Active Queue</span>
+                  <span id="stat-pending-count" class="hig-headline tabular-nums text-sm">5 Tasks</span>
+                </div>
+                <div class="inset-row py-2.5 min-h-[42px]">
+                  <span class="hig-footnote">Sleep Cutoff</span>
+                  <span id="stat-sleep-cutoff" class="hig-headline tabular-nums text-sm">11:30 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 2: 7-Col "Today's Schedule" Inset Group + 5-Col "Workload & Sleep Protection" -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+
+          <!-- Left 7 Cols: Adaptive Timeline -->
+          <div class="bento-card p-8 lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-5">
+                <div>
+                  <h2 class="hig-title-2">Schedule</h2>
+                </div>
+                <button onclick="triggerAutoReshuffle()" class="hig-btn-secondary hig-btn-compact" title="Reshuffle Queue">
+                  <span class="ms-icon text-sm">shuffle</span>
+                  <span>Reshuffle</span>
+                </button>
+              </div>
+
+              <div id="timeline-list" class="inset-group"></div>
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: Workload & Sleep Protection -->
+          <div class="bento-card p-8 lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <h2 class="hig-title-2 mb-4">Sleep &amp; Rest Protection</h2>
+
+              <div class="inset-group mb-5">
+                <div class="inset-row">
+                  <div>
+                    <div class="hig-headline">Sleep Boundary Guard (23:30)</div>
+                    <p id="sleep-guard-desc" class="hig-footnote">
+                      Tasks crossing 11:30 PM are automatically flagged for morning deferral.
+                    </p>
+                  </div>
+                  <button onclick="protectSleepWindow()" class="hig-btn-secondary hig-btn-compact shrink-0">
+                    <span class="ms-icon text-sm">shield</span>
+                    <span>Protect</span>
+                  </button>
+                </div>
+
+                <div class="inset-row">
+                  <div>
+                    <div id="overload-banner-title" class="hig-headline">Evening Overload Relief</div>
+                    <p id="overload-banner-desc" class="hig-footnote">
+                      Defer flexible medium/low tasks to tomorrow when your evening feels packed.
+                    </p>
+                  </div>
+                  <button onclick="applyOverloadRelief()" class="hig-btn-secondary hig-btn-compact shrink-0">
+                    <span class="ms-icon text-sm">nightlight</span>
+                    <span>Relief</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="hig-caption">Deferred for Rest: <strong id="stat-deferred-count" class="tabular-nums">0 Tasks</strong></span>
+              <button onclick="switchAppView('capture', 1)" class="hig-footnote font-semibold underline" style="color: var(--label-primary);">
+                Open Smart Capture →
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 2: SMART CAPTURE STUDIO (Symmetrical 2-Column OCR + Time Guard)
+           ==================================================================== -->
+      <section id="app-view-capture" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+
+          <!-- Left 6 Cols: Dropzone + Sample Presets + Text Parser -->
+          <div class="bento-card p-8 lg:col-span-6 flex flex-col justify-between">
+            <div>
+              <h1 class="hig-title-2 mb-2">Smart Capture</h1>
+              <p class="hig-footnote mb-5">
+                Extract tasks and deadlines from screenshots or text.
+              </p>
+
+              <!-- Drag & Drop Zone -->
+              <label
+                for="capture-file-input"
+                class="inset-group p-6 mb-5 flex flex-col items-center justify-center text-center cursor-pointer hover:opacity-90 transition-opacity"
+              >
+                <div class="w-10 h-10 rounded-full flex items-center justify-center mb-2" style="background: var(--sys-tertiary);">
+                  <span class="ms-icon">upload_file</span>
+                </div>
+                <div class="hig-headline">Drop Screenshot or Click to Upload</div>
+                <div class="hig-footnote mt-0.5">Images or text messages</div>
+                <input id="capture-file-input" type="file" accept="image/*" class="hidden" onchange="handleScreenshotUpload(event)" />
+              </label>
+
+              <!-- Preset Scenarios -->
+              <div class="mb-5">
+                <div class="hig-caption mb-2">Presets</div>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" onclick="loadSampleScenario('cn_whatsapp')" class="hig-btn-secondary hig-btn-compact">
+                    WhatsApp (4:30 PM)
+                  </button>
+                  <button type="button" onclick="loadSampleScenario('dbms_portal')" class="hig-btn-secondary hig-btn-compact">
+                    Canvas (5:00 PM)
+                  </button>
+                  <button type="button" onclick="loadSampleScenario('club_approximate')" class="hig-btn-secondary hig-btn-compact">
+                    Discord (Evening)
+                  </button>
+                  <button type="button" onclick="loadSampleScenario('ambiguous_nine')" class="hig-btn-secondary hig-btn-compact">
+                    Ambiguous (9:00)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Raw Text Input -->
+              <div>
+                <label class="hig-caption block mb-2">Raw Message / OCR Text</label>
+                <textarea
+                  id="capture-raw-text"
+                  rows="3"
+                  placeholder="Paste any announcement, e.g. 'Submit DBMS Assignment 4 tomorrow before 5:00 PM'..."
+                  class="hig-input resize-none"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="pt-5">
+              <button type="button" onclick="runSmartExtract()" class="hig-btn-primary w-full">
+                <span class="ms-icon text-base">auto_awesome</span>
+                <span>Extract Task</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right 6 Cols: Structured Extraction Preview (HIGHLIGHTED IN WHITE!) -->
+          <div class="bento-card bento-card-highlight p-8 lg:col-span-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="hig-caption">Structured Output</span>
+                <span id="ext-accuracy-badge" class="hig-pill hig-pill-strong">Exact Time Verified</span>
+              </div>
+              <h2 class="hig-title-2 mb-6">Task Preview</h2>
+
+              <div class="inset-group mb-5">
+                <div class="inset-row">
+                  <span class="hig-footnote">Task Title</span>
+                  <span id="ext-title" class="hig-headline text-right">CN Record Submission</span>
+                </div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Due Date</span>
+                  <span id="ext-deadline" class="hig-headline tabular-nums">Tomorrow</span>
+                </div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Detected Time</span>
+                  <span id="ext-time" class="hig-headline tabular-nums">4:30 PM</span>
+                </div>
+                <div class="inset-row">
+                  <span class="hig-footnote">Priority &amp; Effort</span>
+                  <span id="ext-priority" class="hig-headline tabular-nums">High · 45m</span>
+                </div>
+              </div>
+
+              <!-- Conditional Time Verification Alert -->
+              <div id="ext-confirm-box" class="hidden inset-group p-5 mb-5">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="ms-icon text-sm">schedule</span>
+                  <span class="hig-headline">Time Confirmation Required</span>
+                </div>
+                <p id="ext-confirm-note" class="hig-footnote mb-4">
+                  The source text only specifies an approximate or ambiguous time. Choose an exact slot:
+                </p>
+                <div id="ext-confirm-buttons" class="flex flex-wrap gap-2">
+                  <button type="button" onclick="confirmApproximateTime('9:00 AM')" class="hig-btn-secondary hig-btn-compact tabular-nums">9:00 AM</button>
+                  <button type="button" onclick="confirmApproximateTime('6:00 PM')" class="hig-btn-secondary hig-btn-compact tabular-nums">6:00 PM</button>
+                  <button type="button" onclick="confirmApproximateTime('9:00 PM')" class="hig-btn-secondary hig-btn-compact tabular-nums">9:00 PM</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <button type="button" onclick="commitExtractedTask()" class="hig-btn-secondary w-full" style="background: var(--highlight-pill-bg); color: var(--highlight-pill-text);">
+                <span class="ms-icon text-base">add_task</span>
+                <span>Add to Schedule</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 3: ADAPTIVE PLANNER & MASTER QUEUE (#app-view-tasks)
+           ==================================================================== -->
+      <section id="app-view-tasks" class="hidden space-y-4">
+
+        <!-- Time-of-Day Adaptive Buckets (Peak Window Highlighted in White!) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+          <div class="bento-card p-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="hig-caption">08:00 – 12:00</span>
+              
+            </div>
+            <h3 class="hig-headline mb-3">Morning</h3>
+            <div id="bucket-morning" class="inset-group"></div>
+          </div>
+
+          <div class="bento-card bento-card-highlight p-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="hig-caption">12:00 – 17:00</span>
+              
+            </div>
+            <h3 class="hig-headline mb-3">Afternoon</h3>
+            <div id="bucket-afternoon" class="inset-group"></div>
+          </div>
+
+          <div class="bento-card p-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="hig-caption">17:00 – 23:30</span>
+              
+            </div>
+            <h3 class="hig-headline mb-3">Evening</h3>
+            <div id="bucket-evening" class="inset-group"></div>
+          </div>
+        </div>
+
+        <!-- Master Task Queue -->
+        <div class="bento-card p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h1 class="hig-title-2">All Tasks</h1>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <!-- Sliding Segmented Filter -->
+              <div id="tasks-seg-control" class="hig-segmented" role="tablist">
+                <div class="hig-segmented-thumb"></div>
+                <button type="button" onclick="filterTasksList('all', 0)" class="hig-segmented-btn is-active" data-seg-index="0">All</button>
+                <button type="button" onclick="filterTasksList('pending', 1)" class="hig-segmented-btn" data-seg-index="1">Pending</button>
+                <button type="button" onclick="filterTasksList('completed', 2)" class="hig-segmented-btn" data-seg-index="2">Completed</button>
+              </div>
+
+              <button type="button" onclick="toggleQuickAddTask()" class="hig-btn-primary hig-btn-compact">
+                <span class="ms-icon text-sm">add</span>
+                <span>New</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Collapsible Quick Add Row -->
+          <form id="quick-add-form" onsubmit="submitQuickAddTask(event)" class="hidden inset-group p-5 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              <input id="qa-title" type="text" required placeholder="Task title..." class="hig-input sm:col-span-2" />
+              <input id="qa-deadline" type="text" placeholder="Due (e.g. Tomorrow 5:00 PM)" class="hig-input" />
+              <select id="qa-priority" class="hig-input">
+                <option value="High">High Priority</option>
+                <option value="Medium" selected>Medium Priority</option>
+                <option value="Low">Low Priority</option>
+              </select>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+              <button type="button" onclick="toggleQuickAddTask()" class="hig-btn-secondary hig-btn-compact">
+                <span class="ms-icon text-sm">close</span>
+                <span>Cancel</span>
+              </button>
+              <button type="submit" class="hig-btn-primary hig-btn-compact">
+                <span class="ms-icon text-sm">check</span>
+                <span>Save</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Tasks Inset Grouped List -->
+          <div id="all-tasks-container" class="inset-group"></div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 4: GOALS, HABITS & CAMPUS LIFE (#app-view-life)
+           ==================================================================== -->
+      <section id="app-view-life" class="hidden space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+
+          <!-- Left 7 Cols: Goal-to-Daily-Action Engine -->
+          <div class="bento-card p-8 lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                
+                
+              </div>
+              <h2 class="hig-title-2 mb-2">Semester Goals</h2>
+              <p class="hig-footnote mb-6">
+                Add 30-minute action blocks to today's schedule.
+              </p>
+
+              <div id="goals-list-container" class="space-y-3"></div>
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: Daily Habit Streaks (HIGHLIGHTED IN WHITE!) -->
+          <div class="bento-card bento-card-highlight p-8 lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                
+                
+              </div>
+              <h2 class="hig-title-2 mb-2">Habit Streaks</h2>
+              <p class="hig-footnote mb-6">
+                Tap to toggle daily completion.
+              </p>
+
+              <div id="habits-list-container" class="inset-group"></div>
+            </div>
+
+            <div class="pt-4 flex items-center justify-between">
+              <span class="hig-caption">Sleep Cutoff</span>
+              <span class="hig-pill hig-pill-strong tabular-nums">23:30 Nightly</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Row: Campus Opportunities & Sleep Conflict Radar -->
+        <div class="bento-card p-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div>
+              <h2 class="hig-title-2">Campus Opportunities</h2>
+            </div>
+            <span class="hig-footnote">Checks event times against sleep cutoff</span>
+          </div>
+
+          <div id="opportunities-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 5: MY PROFILE, CALIBRATION & ACCOUNT SETTINGS (#app-view-profile)
+           ==================================================================== -->
+      <section id="app-view-profile" class="hidden space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+
+          <!-- Left 5 Cols: Highlighted Profile Identity Card + Sign Out + Data Controls -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+
+            <!-- Highlighted Identity Card -->
+            <div class="bento-card bento-card-highlight p-8 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-5">
+                  
+                  <span id="profile-display-sleep" class="hig-pill tabular-nums">11:30 PM Cutoff</span>
+                </div>
+
+                <div class="flex items-center gap-4 mb-6">
+                  <div
+                    id="profile-avatar-initials"
+                    class="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-extrabold tracking-tight shrink-0"
+                    style="background: var(--highlight-pill-bg); color: var(--highlight-pill-text);"
+                  >
+                    CH
+                  </div>
+                  <div class="min-w-0">
+                    <h1 id="profile-display-name" class="hig-title-2 truncate">Cherry</h1>
+                    <p id="profile-display-email" class="hig-footnote truncate">cherry@campus.edu · CSE Sem-5</p>
+                    <div class="mt-1.5 flex flex-wrap gap-1.5">
+                      <span id="profile-display-type" class="hig-pill hig-pill-strong">Project-heavy</span>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Profile Overview -->
+                <div class="inset-group mb-6">
+                  <div class="inset-row py-2.5 min-h-[44px]">
+                    <span class="hig-footnote">Completed Tasks</span>
+                    <span id="profile-stat-completed" class="hig-headline tabular-nums text-sm">1 Task</span>
+                  </div>
+                  <div class="inset-row py-2.5 min-h-[44px]">
+                    <span class="hig-footnote">Pending Tasks</span>
+                    <span id="profile-stat-pending" class="hig-headline tabular-nums text-sm">5 Tasks</span>
+                  </div>
+                  <div class="inset-row py-2.5 min-h-[44px]">
+                    <span class="hig-footnote">Habit Streaks</span>
+                    <span id="profile-stat-streaks" class="hig-headline tabular-nums text-sm">24 Days</span>
+                  </div>
+                  <div class="inset-row py-2.5 min-h-[44px]">
+                    <span class="hig-footnote">Energy Level</span>
+                    <span id="profile-stat-energy" class="hig-headline tabular-nums text-sm">Energy 3 / 5</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Prominent Sign Out & Account Switch Actions -->
+              <div class="space-y-2.5 pt-2">
+                <button
+                  type="button"
+                  onclick="signOutUserAccount()"
+                  class="hig-btn-secondary w-full"
+                  style="background: var(--highlight-pill-bg); color: var(--highlight-pill-text);"
+                >
+                  <span class="ms-icon text-base">logout</span>
+                  <span>Sign Out</span>
+                </button>
+                <button
+                  type="button"
+                  onclick="signOutToLanding()"
+                  class="hig-btn-secondary w-full"
+                >
+                  <span class="ms-icon text-base">home</span>
+                  <span>Home</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Data Backup & Queue Recovery Controls -->
+            <div class="bento-card p-6 flex flex-col justify-between">
+              <div>
+                <h3 class="hig-headline mb-3">Data &amp; Queue</h3>
+                <div class="space-y-2.5">
+                  <button type="button" onclick="restoreAllDeferredTasks()" class="hig-btn-secondary w-full justify-between">
+                    <span class="flex items-center gap-2">
+                      <span class="ms-icon text-sm">restore</span>
+                      <span>Restore Deferred Tasks</span>
+                    </span>
+                    <span class="hig-caption">Queue</span>
+                  </button>
+                  <button type="button" onclick="exportProfileDataJSON()" class="hig-btn-secondary w-full justify-between">
+                    <span class="flex items-center gap-2">
+                      <span class="ms-icon text-sm">download</span>
+                      <span>Export Data (.JSON)</span>
+                    </span>
+                    <span class="hig-caption">Backup</span>
+                  </button>
+                  <button type="button" onclick="resetDemoWorkspace()" class="hig-btn-secondary w-full justify-between">
+                    <span class="flex items-center gap-2">
+                      <span class="ms-icon text-sm">restart_alt</span>
+                      <span>Reset Demo Data</span>
+                    </span>
+                    <span class="hig-caption">Default</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right 7 Cols: Profile Settings, Circadian Calibration & Visual Preferences -->
+          <div class="bento-card p-8 lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <h2 class="hig-title-2 mb-2">Profile &amp; Settings</h2>
+              <p class="hig-footnote mb-6">
+                Customize your details, workload rhythm, sleep cutoff, and appearance.
+              </p>
+
+              <form id="profile-settings-form" onsubmit="saveProfileSettings(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="hig-caption block mb-1.5">Display Name</label>
+                    <input id="profile-input-name" type="text" required value="Cherry" class="hig-input" />
+                  </div>
+                  <div>
+                    <label class="hig-caption block mb-1.5">Student Email / Handle</label>
+                    <input id="profile-input-email" type="email" value="cherry@campus.edu" class="hig-input" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="hig-caption block mb-1.5">Department &amp; Track</label>
+                    <input id="profile-input-dept" type="text" value="Computer Science · Sem 5" class="hig-input" />
+                  </div>
+                  <div>
+                    <label class="hig-caption block mb-1.5">Workload Rhythm</label>
+                    <select id="profile-input-type" class="hig-input">
+                      <option value="Project-heavy">Project-heavy</option>
+                      <option value="Exam-focused">Exam-focused</option>
+                      <option value="Club-active &amp; Balanced">Club-active &amp; Balanced</option>
+                      <option value="Research &amp; Deep Work">Research &amp; Deep Work</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="hig-caption block mb-1.5">Sleep Cutoff</label>
+                    <select id="profile-input-sleep" class="hig-input">
+                      <option value="10:30 PM">10:30 PM (Early Recovery)</option>
+                      <option value="11:00 PM">11:00 PM (Standard Rest)</option>
+                      <option value="11:30 PM" selected>11:30 PM (23:30 Default Guard)</option>
+                      <option value="12:00 AM">12:00 AM (Midnight Cutoff)</option>
+                      <option value="12:30 AM">12:30 AM (Late Sprint Cutoff)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="hig-caption block mb-1.5">Default Energy Level</label>
+                    <select id="profile-input-energy" class="hig-input">
+                      <option value="1">1 · Low (Quick Wins)</option>
+                      <option value="2">2 · Low Focus</option>
+                      <option value="3" selected>3 · Balanced Focus</option>
+                      <option value="4">4 · High Focus</option>
+                      <option value="5">5 · Peak Focus (Deep Sprints)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Appearance & Interactive Backlight Settings -->
+                <div class="pt-2">
+                  <label class="hig-caption block mb-2">Appearance</label>
+                  <div class="inset-group">
+                    <div class="inset-row">
+                      <div>
+                        <div class="hig-headline text-sm">Color Appearance Mode</div>
+                        <div class="hig-footnote text-xs">Switch between Pro Dark (#050506) and Daylight (#F5F5F7)</div>
+                      </div>
+                      <div class="theme-switch-pill" role="group" aria-label="Profile Theme Switcher">
+                        <button type="button" onclick="setThemeMode('light')" class="theme-switch-btn" data-theme-btn="light">
+                          <span class="ms-icon text-[14px]">light_mode</span>
+                          <span>Light</span>
+                        </button>
+                        <button type="button" onclick="setThemeMode('dark')" class="theme-switch-btn is-active" data-theme-btn="dark">
+                          <span class="ms-icon text-[14px]">dark_mode</span>
+                          <span>Dark</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="inset-row">
+                      <div>
+                        <div class="hig-headline text-sm">Cursor-Touch Box Elevation &amp; Radiant Backlight</div>
+                        <div class="hig-footnote text-xs">Raises cards and illuminates a backlight halo wherever your cursor touches</div>
+                      </div>
+                      <button
+                        type="button"
+                        id="profile-backlight-btn"
+                        onclick="toggleCardBacklightEffect()"
+                        class="hig-btn-secondary hig-btn-compact"
+                      >
+                        Enabled ✓
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-4 flex flex-wrap items-center justify-between gap-3">
+                  <span class="hig-footnote">Settings saved locally.</span>
+                  <button type="submit" class="hig-btn-primary px-7">
+                    <span class="ms-icon text-base">check</span>
+                    <span>Save Profile</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       FOCUS SANCTUARY FULL-SCREEN MODAL (#focus-overlay)
+       ======================================================================== -->
+  <div id="focus-overlay" class="hidden fixed inset-0 z-50 flex flex-col justify-between p-8" style="background: var(--sys-bg); color: var(--label-primary);">
+    <div class="max-w-[960px] w-full mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="hig-headline font-semibold">
+          <span class="ms-icon text-base align-middle mr-1">self_improvement</span>Focus
+        </span>
+        <span id="focus-sound-status" class="hig-caption">Soundscape: Off</span>
+      </div>
+      <button onclick="closeFocusOverlay()" class="hig-btn-secondary hig-btn-compact" title="Exit">
+        <span class="ms-icon text-sm">close</span>
+        <span>Exit</span>
+      </button>
+    </div>
+
+    <div class="max-w-xl w-full mx-auto my-auto text-center">
+      <div class="hig-caption mb-2">Active Task</div>
+      <h1 id="focus-task-title" class="hig-title-1 mb-2">Complete project prototype</h1>
+      <p id="focus-task-meta" class="hig-footnote mb-8 tabular-nums">50 min · High Priority</p>
+
+      <!-- Session Duration Presets -->
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <button type="button" onclick="setFocusDurationMinutes(25)" class="hig-btn-secondary hig-btn-compact tabular-nums">25m</button>
+        <button type="button" onclick="setFocusDurationMinutes(50)" class="hig-btn-secondary hig-btn-compact tabular-nums">50m</button>
+        <button type="button" onclick="setFocusDurationMinutes(90)" class="hig-btn-secondary hig-btn-compact tabular-nums">90m</button>
+      </div>
+
+      <!-- Tabular-Nums Giant Countdown -->
+      <div id="focus-timer-display" class="text-7xl sm:text-8xl font-bold tracking-tight tabular-nums leading-none mb-8">
+        50:00
+      </div>
+
+      <!-- Soundscape Mode Selector -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
+        <button type="button" onclick="selectFocusAudioMode('off')" id="audio-mode-off" class="hig-btn-secondary hig-btn-compact">
+          <span class="ms-icon text-sm">volume_off</span>
+          <span>Mute</span>
+        </button>
+        <button type="button" onclick="selectFocusAudioMode('rain')" id="audio-mode-rain" class="hig-btn-secondary hig-btn-compact">
+          <span class="ms-icon text-sm">water_drop</span>
+          <span>Rain</span>
+        </button>
+        <button type="button" onclick="selectFocusAudioMode('brown')" id="audio-mode-brown" class="hig-btn-secondary hig-btn-compact">
+          <span class="ms-icon text-sm">airwave</span>
+          <span>Noise</span>
+        </button>
+        <button type="button" onclick="selectFocusAudioMode('drone')" id="audio-mode-drone" class="hig-btn-secondary hig-btn-compact">
+          <span class="ms-icon text-sm">graphic_eq</span>
+          <span>40Hz</span>
+        </button>
+      </div>
+
+      <!-- Primary & Secondary Controls -->
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button id="focus-play-btn" onclick="toggleFocusTimer()" class="hig-btn-primary px-8">
+          <span class="ms-icon text-base">play_arrow</span>
+          <span>Start</span>
+        </button>
+        <button onclick="resetFocusTimer()" class="hig-btn-secondary">
+          <span class="ms-icon text-base">restart_alt</span>
+          <span>Reset</span>
+        </button>
+        <button onclick="completeTaskFromFocus()" class="hig-btn-secondary">
+          <span class="ms-icon text-base">check</span>
+          <span>Done</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-[960px] w-full mx-auto text-center hig-caption">
+      Press Esc to exit
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       UNIVERSAL ⌘K COMMAND PALETTE MODAL (#cmd-palette-modal)
+       ======================================================================== -->
+  <div id="cmd-palette-modal" class="hidden fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4" style="background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(8px);">
+    <div class="hig-modal-glass w-full max-w-[560px] rounded-3xl overflow-hidden">
+      <div class="p-4 border-b flex items-center gap-3" style="border-color: var(--sys-hairline);">
+        <span class="kbd-badge">⌘K</span>
+        <input
+          id="cmd-palette-input"
+          type="text"
+          placeholder="Type a command or search actions (e.g. Take Care, Energy 5, Capture, Goals, Rain)..."
+          class="w-full bg-transparent text-sm outline-none"
+          style="color: var(--label-primary);"
+          oninput="renderCommandPaletteList(this.value)"
+        />
+        <button onclick="closeCommandPalette()" class="hig-caption hover:underline">ESC</button>
+      </div>
+      <div id="cmd-palette-list" class="max-h-[340px] overflow-y-auto p-2 divide-y" style="border-color: var(--sys-hairline);"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       INTERACTIVE HELP, GESTURES & SHORTCUTS MODAL (#help-modal)
+       ======================================================================== -->
+  <div id="help-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" style="background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);">
+    <div class="hig-modal-glass w-full max-w-[680px] rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 mb-6 border-b" style="border-color: var(--sys-hairline);">
+        <div>
+          <h2 class="hig-title-2">Shortcuts &amp; Gestures</h2>
+        </div>
+        <button onclick="closeHelpModal()" class="hig-btn-secondary hig-btn-compact" title="Close">
+          <span class="ms-icon text-sm">close</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div class="inset-group p-4">
+          <div class="hig-headline mb-1">Drag Card to Defer</div>
+          <p class="hig-footnote">On Today, drag the main card left to defer it to tomorrow.</p>
+        </div>
+        <div class="inset-group p-4">
+          <div class="hig-headline mb-1">Energy Calibration</div>
+          <p class="hig-footnote">Press keys 1–5 to reshuffle tasks based on current energy.</p>
+        </div>
+        <div class="inset-group p-4">
+          <div class="hig-headline mb-1">One-Click Rebalance</div>
+          <p class="hig-footnote">Keeps urgent deadlines today, defers flexible work, and guards sleep time.</p>
+        </div>
+        <div class="inset-group p-4">
+          <div class="hig-headline mb-1">Goals &amp; Smart Capture</div>
+          <p class="hig-footnote">Convert goals into 30m steps, or extract tasks from text and screenshots.</p>
+        </div>
+      </div>
+
+      <div class="hig-caption mb-2">Keyboard Shortcuts</div>
+      <div class="inset-group mb-6">
+        <div class="inset-row">
+          <span class="hig-footnote">Open Universal Command Palette</span>
+          <span class="kbd-badge">⌘K / Ctrl+K</span>
+        </div>
+        <div class="inset-row">
+          <span class="hig-footnote">Set Energy Level</span>
+          <span class="kbd-badge">Keys 1 – 5</span>
+        </div>
+        <div class="inset-row">
+          <span class="hig-footnote">Switch Light / Dark Appearance</span>
+          <span class="kbd-badge">Key T</span>
+        </div>
+        <div class="inset-row">
+          <span class="hig-footnote">Open / Close Help Guide</span>
+          <span class="kbd-badge">?</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <button onclick="resetDemoWorkspace()" class="hig-btn-secondary hig-btn-compact">
+          <span class="ms-icon text-sm">restart_alt</span>
+          <span>Reset Data</span>
+        </button>
+        <button onclick="closeHelpModal(); enterDemoWorkspace('today');" class="hig-btn-primary hig-btn-compact">
+          <span class="ms-icon text-sm">arrow_forward</span>
+          <span>Workspace</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

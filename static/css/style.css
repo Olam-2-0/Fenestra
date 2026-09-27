@@ -1,0 +1,1158 @@
+/* ==========================================================================
+   FENESTRA OS — APPLE HIG + HIGH-CONTRAST BLACK & WHITE EDITORIAL SYSTEM
+   Fonts: Plus Jakarta Sans, Inter, Instrument Serif (Editorial), JetBrains Mono
+   Icons: Google Material Symbols Outlined
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root,
+html[data-theme="dark"] {
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+  /* Apple Spring Physics Curves */
+  --spring-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --spring-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Apple Signature Pro Dark Palette */
+  --sys-bg: #000000;
+  --sys-bg-alt: #0D0D11;
+  --sys-surface: #141418;
+  --sys-elevated: #1C1C22;
+  --sys-tertiary: #282830;
+  --sys-glass: rgba(20, 20, 25, 0.85);
+  --sys-glass-heavy: rgba(20, 20, 25, 0.96);
+
+  --label-primary: #FFFFFF;
+  --label-secondary: #9B9BA3;
+  --label-tertiary: #6C6C76;
+
+  --sys-hairline: rgba(255, 255, 255, 0.1);
+  --sys-hairline-strong: rgba(255, 255, 255, 0.22);
+
+  --accent-fill: #FFFFFF;
+  --accent-text: #000000;
+
+  /* Card and Inset Tokens - Cohesive Dark Aesthetics */
+  --highlight-bg: #1B1B22;
+  --highlight-elevated: #24242C;
+  --highlight-text: #FFFFFF;
+  --highlight-subtext: #9B9BA3;
+  --highlight-border: rgba(255, 255, 255, 0.2);
+  --highlight-pill-bg: #FFFFFF;
+  --highlight-pill-text: #000000;
+
+  --card-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --spotlight-color: rgba(255, 255, 255, 0.05);
+}
+
+html.light-mode,
+body.light-mode,
+html[data-theme="light"] {
+  /* Apple Signature Light Mode (#F5F5F7 Background + Pure White Cards) */
+  --sys-bg: #F5F5F7;
+  --sys-bg-alt: #EBEBF0;
+  --sys-surface: #FFFFFF;
+  --sys-elevated: #F2F2F7;
+  --sys-tertiary: #E5E5EA;
+  --sys-glass: rgba(245, 245, 247, 0.88);
+  --sys-glass-heavy: rgba(255, 255, 255, 0.96);
+
+  --label-primary: #1D1D1F;
+  --label-secondary: #6E6E73;
+  --label-tertiary: #86868B;
+
+  --sys-hairline: rgba(0, 0, 0, 0.08);
+  --sys-hairline-strong: rgba(0, 0, 0, 0.16);
+
+  --accent-fill: #1D1D1F;
+  --accent-text: #FFFFFF;
+
+  /* In Light Mode: Clean White Surface with Refined Dark Contrast */
+  --highlight-bg: #FFFFFF;
+  --highlight-elevated: #F2F2F7;
+  --highlight-text: #1D1D1F;
+  --highlight-subtext: #6E6E73;
+  --highlight-border: rgba(0, 0, 0, 0.14);
+  --highlight-pill-bg: #1D1D1F;
+  --highlight-pill-text: #FFFFFF;
+
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+  --spotlight-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--sys-bg);
+  color: var(--label-primary);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--sys-bg) !important;
+  color: var(--label-primary) !important;
+  transition: background-color 0.4s var(--spring-fluid), color 0.4s var(--spring-fluid);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--label-primary);
+  color: var(--sys-bg);
+}
+
+/* Material Symbols Icon Alignment */
+.ms-icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}
+
+/* ==========================================================================
+   1. DEDICATED 2-BUTTON THEME SWITCHER PILL (☀ Light | ☾ Dark)
+   ========================================================================== */
+.theme-switch-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 9999px;
+  background: var(--sys-elevated);
+  border: 1px solid var(--sys-hairline-strong);
+  gap: 2px;
+}
+
+.theme-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--label-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.14s var(--spring-snappy);
+}
+
+.theme-switch-btn:hover:not(.is-active) {
+  color: var(--label-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.light-mode .theme-switch-btn:hover:not(.is-active) {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.theme-switch-btn:active {
+  transform: scale(0.94);
+}
+
+.theme-switch-btn.is-active {
+  background: var(--accent-fill);
+  color: var(--accent-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   2. SMOOTH AMBIENT CURSOR LIGHT AURA (No Distracting Pointer Ring)
+   ========================================================================== */
+.cursor-ambient-light {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.045) 32%,
+    rgba(255, 255, 255, 0.012) 56%,
+    transparent 74%
+  );
+  filter: blur(12px);
+  transform: translate3d(-1000px, -1000px, 0);
+  transition: opacity 0.35s ease, width 0.4s var(--spring-fluid), height 0.4s var(--spring-fluid);
+  will-change: transform;
+}
+
+html.light-mode .cursor-ambient-light,
+body.light-mode .cursor-ambient-light,
+html[data-theme="light"] .cursor-ambient-light {
+  background: radial-gradient(
+    circle,
+    rgba(9, 9, 11, 0.07) 0%,
+    rgba(9, 9, 11, 0.028) 34%,
+    transparent 70%
+  );
+}
+
+.cursor-ambient-light.is-over-card {
+  width: 640px;
+  height: 640px;
+}
+
+/* Hide legacy dot/ring if ever present */
+.cursor-dot,
+.cursor-ring {
+  display: none !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-ambient-light {
+    display: none !important;
+  }
+}
+
+/* Subtle Architectural Grid Backdrop */
+.bg-architectural-grid {
+  background-size: 52px 52px;
+  background-image:
+    linear-gradient(to right, var(--sys-hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--sys-hairline) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 15%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 15%, #000 35%, transparent 100%);
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY HIERARCHY (PLUS JAKARTA + INSTRUMENT SERIF + JETBRAINS MONO)
+   ========================================================================== */
+.font-editorial {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+.hig-display {
+  font-family: var(--font-sans);
+  font-size: clamp(2.9rem, 6.2vw, 5.4rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+.hig-title-1 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 700;
+  letter-spacing: -0.034em;
+  line-height: 1.12;
+}
+
+.hig-title-2 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.22;
+}
+
+.hig-headline {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+
+.hig-body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+  color: var(--label-secondary);
+}
+
+.hig-footnote {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.45;
+  color: var(--label-secondary);
+}
+
+.hig-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label-tertiary);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Moving / Kinetic Word Rotator in Hero (Highlighted in Crisp White!) */
+.kinetic-word-slot {
+  display: inline-flex;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  height: 1.12em;
+  padding: 0 0.24em;
+  border-radius: 18px;
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
+  border: 2px solid var(--highlight-border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.kinetic-word-track {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.68s var(--spring-bouncy);
+}
+
+.kinetic-word-item {
+  height: 1.12em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  padding: 0 0.16em;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Interactive Moving Letters on Hover */
+.kinetic-hover-text {
+  display: inline-block;
+  transition:
+    letter-spacing 0.24s var(--spring-fluid),
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.kinetic-hover-text:hover {
+  letter-spacing: -0.012em;
+  color: var(--label-primary);
+  opacity: 0.95;
+}
+
+/* Infinite Kinetic Marquee Strip (High-Contrast White Band!) */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
+  padding: 15px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--highlight-text);
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ==========================================================================
+   4. LIQUID GLASS NAVIGATION & MODALS
+   ========================================================================== */
+.hig-nav {
+  background: var(--sys-glass);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-bottom: 1px solid var(--sys-hairline);
+  transition: background-color 0.35s var(--spring-fluid), border-color 0.35s var(--spring-fluid);
+}
+
+.hig-modal-glass {
+  background: var(--sys-glass-heavy);
+  backdrop-filter: saturate(190%) blur(36px);
+  -webkit-backdrop-filter: saturate(190%) blur(36px);
+  border: 1px solid var(--sys-hairline-strong);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+}
+
+/* ==========================================================================
+   5. APPLE BENTO CARDS + CURSOR-TOUCH RAISE, RADIANT BACKLIGHT & SELECTION
+   ========================================================================== */
+.bento-card {
+  position: relative;
+  background: var(--sys-surface);
+  border: 1px solid var(--sys-hairline);
+  border-radius: 24px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition:
+    transform 0.42s var(--spring-bouncy),
+    border-color 0.35s var(--spring-fluid),
+    background-color 0.35s var(--spring-fluid),
+    color 0.35s var(--spring-fluid),
+    box-shadow 0.42s var(--spring-fluid);
+}
+
+.bento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.14),
+    transparent 50%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s ease;
+  z-index: 0;
+}
+
+html.light-mode .bento-card::before {
+  background: radial-gradient(
+    480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(9, 9, 11, 0.065),
+    transparent 50%
+  );
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* GROUNDED APPLE BENTO CARDS: ILLUMINATED BORDER & DIFFUSE BACKLIGHT (NO LIFT) */
+body:not(.backlight-disabled) .bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.44);
+  box-shadow:
+    0 20px 50px -6px rgba(0, 0, 0, 0.72),
+    0 0 36px 1px rgba(255, 255, 255, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+  z-index: 5;
+}
+
+html.light-mode body:not(.backlight-disabled) .bento-card:hover {
+  border-color: rgba(9, 9, 11, 0.32);
+  box-shadow:
+    0 18px 44px -6px rgba(9, 9, 11, 0.12),
+    0 0 30px 1px rgba(9, 9, 11, 0.06),
+    0 0 0 1px rgba(9, 9, 11, 0.18);
+}
+
+.bento-card:active {
+  transform: scale(0.996);
+}
+
+/* HIGH-CONTRAST WHITE HIGHLIGHT CARD (Makes key features pop in white!) */
+.bento-card-highlight {
+  background: var(--highlight-bg) !important;
+  color: var(--highlight-text) !important;
+  border: 1.5px solid var(--highlight-border) !important;
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.38),
+    0 0 28px rgba(255, 255, 255, 0.12) !important;
+}
+
+body:not(.backlight-disabled) .bento-card-highlight:hover {
+  border-color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    0 24px 58px -4px rgba(0, 0, 0, 0.62),
+    0 0 46px 4px rgba(255, 255, 255, 0.28),
+    0 0 0 2px rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light-mode body:not(.backlight-disabled) .bento-card-highlight:hover {
+  box-shadow:
+    0 24px 58px -4px rgba(9, 9, 11, 0.36),
+    0 0 40px 3px rgba(9, 9, 11, 0.16),
+    0 0 0 2px rgba(9, 9, 11, 0.88) !important;
+}
+
+/* INTERACTIVE CARD SELECTION RING (.is-selected-card) */
+.bento-card.is-selected-card {
+  outline: 2.5px solid var(--accent-fill);
+  outline-offset: 3px;
+  box-shadow:
+    0 26px 64px rgba(0, 0, 0, 0.65),
+    0 0 46px 4px rgba(255, 255, 255, 0.26) !important;
+}
+
+html.light-mode .bento-card.is-selected-card {
+  box-shadow:
+    0 26px 64px rgba(9, 9, 11, 0.22),
+    0 0 42px 4px rgba(9, 9, 11, 0.14) !important;
+}
+
+.bento-card-highlight .hig-title-1,
+.bento-card-highlight .hig-title-2,
+.bento-card-highlight .hig-headline {
+  color: var(--highlight-text) !important;
+}
+
+.bento-card-highlight .hig-body,
+.bento-card-highlight .hig-footnote,
+.bento-card-highlight .hig-caption {
+  color: var(--highlight-subtext) !important;
+}
+
+.bento-card-highlight .inset-group {
+  background: var(--highlight-elevated) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light-mode .bento-card-highlight .inset-group {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.bento-card-highlight .inset-row::after {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-mode .bento-card-highlight .inset-row::after {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.bento-card-highlight .hig-pill-strong {
+  background: var(--highlight-pill-bg) !important;
+  color: var(--highlight-pill-text) !important;
+}
+
+.bento-card-highlight .hig-pill:not(.hig-pill-strong) {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: var(--highlight-text) !important;
+}
+
+html.light-mode .bento-card-highlight .hig-pill:not(.hig-pill-strong) {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+}
+
+/* Feature Card Hover / Click-to-Highlight transition */
+.feature-showcase-card {
+  cursor: pointer;
+}
+
+.bento-card-inverted {
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
+  border-radius: 24px;
+  border: 1px solid var(--highlight-border);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.4s var(--spring-fluid), background-color 0.4s var(--spring-fluid), color 0.4s var(--spring-fluid);
+}
+
+/* QUICK FEATURE FINDER / EVALUATOR PILLS */
+.quick-finder-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--sys-surface);
+  color: var(--label-primary);
+  border: 1px solid var(--sys-hairline-strong);
+  cursor: pointer;
+  transition:
+    background-color 0.2s var(--spring-fluid),
+    color 0.2s var(--spring-fluid),
+    box-shadow 0.22s var(--spring-fluid),
+    border-color 0.2s ease,
+    transform 0.12s var(--spring-snappy);
+}
+
+.quick-finder-pill:hover {
+  background: var(--accent-fill);
+  color: var(--accent-text);
+  border-color: var(--accent-fill);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.26), 0 0 16px rgba(255, 255, 255, 0.16);
+}
+
+.quick-finder-pill:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   6. INSET GROUPED LISTS (With Subtle Hover Raise & Backlight)
+   ========================================================================== */
+.inset-group {
+  background: var(--sys-elevated);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--sys-hairline);
+  transition:
+    transform 0.32s var(--spring-fluid),
+    background-color 0.35s var(--spring-fluid),
+    border-color 0.35s var(--spring-fluid),
+    box-shadow 0.35s var(--spring-fluid);
+}
+
+.inset-group:hover {
+  border-color: var(--sys-hairline-strong);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.inset-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  min-height: 54px;
+  transition: background-color 0.18s ease, transform 0.12s var(--spring-snappy);
+}
+
+.inset-row:active {
+  transform: scale(0.997);
+}
+
+.inset-row:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+html.light-mode .inset-row:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+.inset-row:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  right: 0;
+  height: 1px;
+  background: var(--sys-hairline);
+}
+
+/* ==========================================================================
+   7. COLOR-MORPHING BUTTONS & MAGNETIC CONTROLS (44pt HIG Target)
+   ========================================================================== */
+.hig-btn-primary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 9999px;
+  background: var(--accent-fill);
+  color: var(--accent-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: 1.5px solid var(--accent-fill);
+  cursor: pointer;
+  z-index: 1;
+  transition:
+    transform 0.14s var(--spring-snappy),
+    color 0.22s var(--spring-fluid),
+    border-color 0.22s var(--spring-fluid),
+    box-shadow 0.22s var(--spring-fluid);
+}
+
+.hig-btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--sys-bg);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.28s var(--spring-fluid);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.hig-btn-primary:hover {
+  color: var(--label-primary);
+  border-color: var(--label-primary);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28), 0 0 20px rgba(255, 255, 255, 0.14);
+}
+
+.hig-btn-primary:hover::before {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.hig-btn-primary:active {
+  transform: scale(0.965);
+  transition-duration: 0.08s;
+}
+
+.hig-btn-secondary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 9999px;
+  background: var(--sys-elevated);
+  color: var(--label-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: 1px solid var(--sys-hairline-strong);
+  cursor: pointer;
+  z-index: 1;
+  transition:
+    transform 0.14s var(--spring-snappy),
+    color 0.22s var(--spring-fluid),
+    background-color 0.22s var(--spring-fluid),
+    border-color 0.22s var(--spring-fluid),
+    box-shadow 0.22s var(--spring-fluid);
+}
+
+.hig-btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--label-primary);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 0.24s var(--spring-fluid);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.hig-btn-secondary:hover {
+  color: var(--sys-bg);
+  border-color: var(--label-primary);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.hig-btn-secondary:hover::before {
+  transform: scaleY(1);
+}
+
+.hig-btn-secondary:active {
+  transform: scale(0.965);
+  transition-duration: 0.08s;
+}
+
+.hig-btn-compact {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 0.78rem;
+}
+
+/* ==========================================================================
+   8. TRUE SLIDING SEGMENTED CONTROL
+   ========================================================================== */
+.hig-segmented {
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--sys-elevated);
+  border: 1px solid var(--sys-hairline-strong);
+  user-select: none;
+}
+
+.hig-segmented-thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  border-radius: 9px;
+  background: var(--accent-fill);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+  transition:
+    transform 0.26s var(--spring-fluid),
+    width 0.26s var(--spring-fluid),
+    background-color 0.22s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hig-segmented-btn {
+  position: relative;
+  z-index: 1;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 9px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--label-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.12s var(--spring-snappy);
+}
+
+.hig-segmented-btn:hover:not(.is-active) {
+  color: var(--label-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+html.light-mode .hig-segmented-btn:hover:not(.is-active) {
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.hig-segmented-btn:active {
+  transform: scale(0.95);
+}
+
+.hig-segmented-btn.is-active {
+  color: var(--accent-text);
+}
+
+/* ==========================================================================
+   9. INPUTS, PILLS & KBD BADGES
+   ========================================================================== */
+.hig-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--sys-elevated);
+  border: 1px solid var(--sys-hairline-strong);
+  color: var(--label-primary);
+  font-size: 0.9375rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hig-input::placeholder {
+  color: var(--label-tertiary);
+}
+
+.hig-input:focus {
+  border-color: var(--label-primary);
+  background: var(--sys-surface);
+  box-shadow: 0 0 0 3px var(--sys-hairline);
+}
+
+.hig-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: var(--sys-tertiary);
+  color: var(--label-secondary);
+}
+
+.hig-pill-strong {
+  background: var(--accent-fill);
+  color: var(--accent-text);
+}
+
+.kbd-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: var(--sys-tertiary);
+  color: var(--label-secondary);
+  border: 1px solid var(--sys-hairline-strong);
+}
+
+
+/* Tactile Task Check Button */
+.task-check-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  border: 1px solid var(--sys-hairline-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  background: transparent;
+  color: transparent;
+  transition:
+    transform 0.14s var(--spring-snappy),
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.task-check-btn:hover {
+  border-color: var(--accent-fill);
+  box-shadow: 0 0 0 2px var(--sys-hairline);
+}
+
+.task-check-btn:active {
+  transform: scale(0.82);
+}
+
+.task-check-btn.is-checked {
+  background: var(--accent-fill) !important;
+  color: var(--accent-text) !important;
+  border-color: var(--accent-fill) !important;
+}
+
+/* Modal Entrance Transition */
+.hig-modal-glass {
+  animation: modalScaleIn 0.22s var(--spring-fluid) forwards;
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Accessible & Crisp Apple Focus Rings */
+*:focus-visible {
+  outline: 2px solid var(--accent-fill);
+  outline-offset: 2px;
+}
+
+.hig-btn-primary:focus-visible,
+.hig-btn-secondary:focus-visible,
+.quick-finder-pill:focus-visible,
+.theme-switch-btn:focus-visible,
+.hig-segmented-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--sys-bg), 0 0 0 4px var(--accent-fill);
+}
+
+/* ==========================================================================
+   10. STAGE MORPHING & GESTURE PHYSICS
+   ========================================================================== */
+.stage-view {
+  animation: stageEnter 0.34s var(--spring-fluid) forwards;
+}
+
+@keyframes stageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.994);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+#what-now-card {
+  touch-action: pan-y;
+  user-select: none;
+  will-change: transform;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.82); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 120ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   APPLE HIG THEME TOGGLE SWITCH
+   ========================================================================== */
+.apple-theme-switch {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--sys-elevated);
+  border: 1px solid var(--sys-hairline-strong);
+  cursor: pointer;
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.28s var(--spring-fluid), border-color 0.28s var(--spring-fluid);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.apple-theme-switch:focus-visible {
+  box-shadow: 0 0 0 2px var(--sys-bg), 0 0 0 4px var(--accent-fill);
+}
+
+.apple-theme-switch .switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-fill);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: transform 0.28s var(--spring-fluid), background-color 0.28s var(--spring-fluid), color 0.28s var(--spring-fluid);
+}
+
+html.light-mode .apple-theme-switch .switch-knob {
+  transform: translateX(22px);
+}
+
+.apple-theme-switch .icon-moon {
+  display: flex;
+}
+.apple-theme-switch .icon-sun {
+  display: none;
+}
+html.light-mode .apple-theme-switch .icon-moon {
+  display: none;
+}
+html.light-mode .apple-theme-switch .icon-sun {
+  display: flex;
+}
+
+/* ==========================================================================
+   APPLE DYNAMIC EXPANDING ACTION BUTTONS (Smooth Width Expansion on Hover)
+   ========================================================================== */
+.hig-dynamic-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 9999px;
+  background: var(--sys-elevated);
+  border: 1px solid var(--sys-hairline);
+  color: var(--label-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    background-color 0.22s var(--spring-fluid),
+    border-color 0.22s var(--spring-fluid),
+    color 0.22s var(--spring-fluid),
+    padding 0.26s var(--spring-fluid),
+    transform 0.14s var(--spring-snappy);
+}
+
+.hig-dynamic-btn .btn-text {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-width 0.28s var(--spring-fluid),
+    opacity 0.2s ease,
+    margin-left 0.25s var(--spring-fluid);
+  margin-left: 0;
+}
+
+.hig-dynamic-btn:hover {
+  background: var(--sys-tertiary);
+  color: var(--label-primary);
+  border-color: var(--sys-hairline-strong);
+  padding: 0 12px;
+}
+
+.hig-dynamic-btn:hover .btn-text {
+  max-width: 90px;
+  opacity: 1;
+  margin-left: 5px;
+}
+
+.hig-dynamic-btn:active {
+  transform: scale(0.96);
+}
